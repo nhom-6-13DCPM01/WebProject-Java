@@ -25,24 +25,16 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-	<main class="container">
-		<header>
+    
 		<div th:replace="Client/fragments/header:: header"></div>
-		</header>
+
+
 		
-
-
 		<div layout:fragment="content"></div>
 
-		
-		<div th:replace="Client/fragments/footer:: footer"></div>
-		
-	</main>
 
+	
+	<div th:replace="Client/fragments/footer:: footer"></div>
 
     <!-- Js Plugins -->
     <script th:src="@{/Client/js/jquery-3.3.1.min.js}"></script>
