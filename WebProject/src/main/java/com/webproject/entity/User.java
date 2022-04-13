@@ -36,10 +36,13 @@ public class User implements Serializable{
 	@Column(columnDefinition = "varchar(50) default 'ROLE_USER'")
 	private String role;
 	
+	@Column(nullable = false)
 	private boolean enable;
 	
+	@Column(nullable = true)
 	private String otpCode;
 	
+	@Column(nullable = true)
 	private Date requestOtp;
 	
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
