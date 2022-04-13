@@ -1,5 +1,6 @@
 package com.webproject.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
 
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name = "Products")
-public class Product {
+public class Product implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

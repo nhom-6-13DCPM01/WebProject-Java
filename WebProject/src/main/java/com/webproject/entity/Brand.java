@@ -1,5 +1,6 @@
 package com.webproject.entity;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name = "Brands")
-public class Brand {
+public class Brand implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

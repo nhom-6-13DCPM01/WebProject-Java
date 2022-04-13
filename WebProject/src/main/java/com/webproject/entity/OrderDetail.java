@@ -1,5 +1,7 @@
 package com.webproject.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
@@ -20,7 +22,7 @@ import lombok.Setter;
 @Data
 @Entity
 @Table(name = "Orderdetails")
-public class OrderDetail {
+public class OrderDetail implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
