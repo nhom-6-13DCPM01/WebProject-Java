@@ -21,8 +21,10 @@ dependencies {
 	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	compileOnly 'org.projectlombok:lombok:1.18.4'
-    annotationProcessor 'org.projectlombok:lombok:1.18.4'
+	
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+    
     
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
     

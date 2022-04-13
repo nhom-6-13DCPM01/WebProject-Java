@@ -1,5 +1,6 @@
 package com.webproject.tutorial.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
 
@@ -12,20 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Data
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "Users")
-public class User {
+public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,4 +44,6 @@ public class User {
 	
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
 	private Set<Order> orders;
+	
+	
 }

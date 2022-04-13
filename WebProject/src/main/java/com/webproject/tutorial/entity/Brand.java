@@ -18,10 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "Brands")
 public class Brand {
