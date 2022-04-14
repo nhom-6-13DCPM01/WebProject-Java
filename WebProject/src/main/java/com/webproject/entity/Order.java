@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 
-@Data
+
 @Entity
 @Table(name = "Orders")
 public class Order implements Serializable{
@@ -49,4 +49,89 @@ public class Order implements Serializable{
 	@ManyToOne
 	@JoinColumn(name= "userId")
 	private User user;
+
+	public Long getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+
+	public Set<OrderDetail> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
+	
+	public Order() {
+		super();
+	}
+
+	public Order(Long orderId, String address, String phone, String status, Date creationDate, Date deliveryDate,
+			Set<OrderDetail> orderDetails, User user) {
+		super();
+		this.orderId = orderId;
+		this.address = address;
+		this.phone = phone;
+		this.status = status;
+		this.creationDate = creationDate;
+		this.deliveryDate = deliveryDate;
+		this.orderDetails = orderDetails;
+		this.user = user;
+	}
+	
+	
 }

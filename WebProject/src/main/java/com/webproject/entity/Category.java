@@ -13,10 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
-import lombok.Data;
-
-
-@Data
 @Entity
 @Table(name = "Categories")
 public class Category implements Serializable{
@@ -30,4 +26,43 @@ public class Category implements Serializable{
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private Set<Product> products;
+
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+
+	
+	public Category() {
+		super();
+	}
+
+	public Category(Long categoryId, String name, Set<Product> products) {
+		super();
+		this.categoryId = categoryId;
+		this.name = name;
+		this.products = products;
+	}
+	
+	
+	
 }

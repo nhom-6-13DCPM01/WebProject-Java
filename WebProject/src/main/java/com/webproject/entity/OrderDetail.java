@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import lombok.Data;
 
 
-@Data
 @Entity
 @Table(name = "Orderdetails")
 public class OrderDetail implements Serializable{
@@ -38,5 +37,62 @@ public class OrderDetail implements Serializable{
 	@ManyToOne
 	@JoinColumn(name= "productId")
 	private Product product;
+
+	public Long getOrderDetailId() {
+		return orderDetailId;
+	}
+
+	public void setOrderDetailId(Long orderDetailId) {
+		this.orderDetailId = orderDetailId;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	
+
+	public OrderDetail() {
+		super();
+	}
+
+	public OrderDetail(Long orderDetailId, int quantity, float total, Order order, Product product) {
+		super();
+		this.orderDetailId = orderDetailId;
+		this.quantity = quantity;
+		this.total = total;
+		this.order = order;
+		this.product = product;
+	}
+	
+	
 	
 }

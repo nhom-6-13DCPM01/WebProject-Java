@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 
-@Data
+
 @Entity
 @Table(name = "Brands")
 public class Brand implements Serializable{
@@ -32,4 +32,52 @@ public class Brand implements Serializable{
 	
 	@OneToMany(mappedBy = "brand",cascade = CascadeType.ALL)
 	private Set<Product> products;
+
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public Set<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
+	
+	
+
+	public Brand() {
+		super();
+	}
+
+	public Brand(Long brandId, String name, String logo, Set<Product> products) {
+		super();
+		this.brandId = brandId;
+		this.name = name;
+		this.logo = logo;
+		this.products = products;
+	}
+	
+	
 }
