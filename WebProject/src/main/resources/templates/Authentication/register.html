@@ -11,9 +11,9 @@ layout:decorate="~{Layouts/loginlayout.html}">
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form th:action="@{/j_spring_security_check}" method="post">
+              <form>
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                  <p class="lead fw-normal mb-0 me-3">Sign in with</p>
+                  <p class="lead fw-normal mb-0 me-3">Login with</p>
                   <button type="button" class="btn btn-primary btn-floating mx-1">
                     <i class="fab fa-facebook-f"></i>
                   </button>
@@ -35,33 +35,33 @@ layout:decorate="~{Layouts/loginlayout.html}">
                 <div class="form-outline mb-4">
                     <label class="form-label" for="form3Example3">Email address</label>
                   <input type="email" id="form3Example3" class="form-control form-control-lg"
-                    placeholder="Enter a valid email address" name = "username"/>
-                  
+                    placeholder="Enter a valid email address" />
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form3Example3">Display Name</label>
+                  <input type="email" id="form3Example3" class="form-control form-control-lg"
+                    placeholder="Enter your name" />
                 </div>
       
                 <!-- Password input -->
                 <div class="form-outline mb-3">
                     <label class="form-label" for="form3Example4">Password</label>
                   <input type="password" id="form3Example4" class="form-control form-control-lg"
-                    placeholder="Enter password" name = "password"/>
+                    placeholder="Enter password" />
                 </div>
-      
-                <div class="d-flex justify-content-between align-items-center">
-                  <!-- Checkbox -->
-                  <div class="form-check mb-0">
-                    <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3" />
-                    <label class="form-check-label" for="form2Example3">
-                      Remember me
-                    </label>
-                  </div>
-                  <a href="#!" class="text-body">Forgot password?</a>
+
+                <div class="form-outline mb-3">
+                    <label class="form-label" for="form3Example4">Password Again</label>
+                  <input type="password" id="form3Example4" class="form-control form-control-lg"
+                    placeholder="Enter replace password" />
                 </div>
       
                 <div class="text-center text-lg-start mt-4 pt-2">
-                  <button type="submit" class="btn btn-primary btn-lg"
-                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
-                  <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a th:href="@{/Authentication/Register}"
-                      class="link-danger">Register</a></p>
+                  <button type="button" class="btn btn-primary btn-lg"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
+                  <p class="small fw-bold mt-2 pt-1 mb-0">Do have an account? <a th:href="@{/Authentication/Login}"
+                      class="link-danger">Login</a></p>
                 </div>
               </form>
             </div>

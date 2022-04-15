@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
 
 <head>
 </head>
@@ -34,9 +35,6 @@
                     <li><a href="#">Spanis</a></li>
                     <li><a href="#">English</a></li>
                 </ul>
-            </div>
-            <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -101,8 +99,14 @@
                                     <li><a href="#">English</a></li>
                                 </ul>
                             </div>
-                            <div class="header__top__right__auth">
-                                <a href="#"><i class="fa fa-user"></i> Login</a>
+                            <div sec:authorize="isAuthenticated()">
+                                Webcome <span sec:authentication="name"></span>
+                                <div class="header__top__right__auth">
+                                    <a th:href="@{/logout}"><i class="fa fa-user"></i> Logout</a>
+                                </div>
+                            </div>   
+                            <div sec:authorize="isAnonymous()" class="header__top__right__auth">
+                                <a th:href="@{/Authentication/Login}"><i class="fa fa-user"></i> Login</a>
                             </div>
                         </div>
                     </div>
