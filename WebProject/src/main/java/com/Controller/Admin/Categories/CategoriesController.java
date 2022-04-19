@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/Admin/Categories")
 public class CategoriesController {
+    
     @GetMapping("/List")
     public String CategoriesShow(){
         return "Admin/categories";

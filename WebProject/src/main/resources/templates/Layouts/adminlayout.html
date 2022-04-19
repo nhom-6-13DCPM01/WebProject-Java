@@ -6,8 +6,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Star Admin2 </title>
+  <title>Star Admin </title>
   <!-- plugins:css -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
   <link rel="stylesheet" type="text/css" th:href="@{/Admin/vendors/feather/feather.css}">
   <link rel="stylesheet" th:href="@{/Admin/vendors/mdi/css/materialdesignicons.min.css}">
   <link rel="stylesheet" th:href="@{/Admin/vendors/ti-icons/css/themify-icons.css}">
@@ -25,7 +26,6 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 </head>
 <body>
   <div class="container-scroller">
-
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -36,10 +36,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </div>
         <div>
           <a class="navbar-brand brand-logo" href="/Admin/index.html">
-            <img src="images/logo.svg" alt="logo" />
+            <img th:src="@{/Admin/images/logo.svg}" alt="logo" />
           </a>
           <a class="navbar-brand brand-logo-mini" href="/Admin/index.html">
-            <img src="images/logo-mini.svg" alt="logo" />
+            <img th:src="@{/Admin/images/logo-mini.svg}" alt="logo" />
           </a>
         </div>
       </div>
@@ -177,10 +177,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </li>
           <li class="nav-item dropdown d-none d-lg-block user-dropdown">
             <a class="nav-link" id="UserDropdown" href="/Admin/#" data-bs-toggle="dropdown" aria-expanded="false">
-              <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="Profile image"> </a>
+              <img class="img-xs rounded-circle" th:src="@{/Admin/images/faces/face8.jpg}" alt="Profile image"> </a>
             <div sec:authorize="isAuthenticated()" class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
-                <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
+                <img class="img-md rounded-circle" th:src="@{/Admin/images/faces/face8.jpg}" alt="Profile image">
                 <p class="mb-1 mt-3 font-weight-semibold" th:text="${#authentication.getPrincipal().getUser().getDisplayName()}"></p>
                 <p class="fw-light text-muted mb-0" sec:authentication="name"></p>
               </div>
