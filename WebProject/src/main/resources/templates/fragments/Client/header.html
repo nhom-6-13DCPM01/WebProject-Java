@@ -104,6 +104,9 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                                 <div class="header__top__right__auth">
                                     <a th:href="@{/logout}"><i class="fa fa-user"></i> Logout</a>
                                 </div>
+                                <div class="header__top__right__auth" sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a th:href="@{/Admin/Index}"><i class="fa fa-arrow-right"></i>Go to Admin</a>
+                                </div>
                             </div>   
                             <div sec:authorize="isAnonymous()" class="header__top__right__auth">
                                 <a th:href="@{/Authentication/Login}"><i class="fa fa-user"></i> Login</a>
