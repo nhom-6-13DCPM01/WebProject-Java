@@ -60,5 +60,9 @@ public class MyUserDetail implements UserDetails{
        
         return user.isEnable();
     }
+
+    public User getUser() {
+        return user;
+    }
     
 }

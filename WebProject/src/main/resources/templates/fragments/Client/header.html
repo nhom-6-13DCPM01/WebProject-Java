@@ -100,7 +100,7 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                                 </ul>
                             </div>
                             <div sec:authorize="isAuthenticated()">
-                                Webcome <span sec:authentication="name"></span>
+                                Webcome <span th:text="${#authentication.getPrincipal().getUser().getDisplayName()}"></span>
                                 <div class="header__top__right__auth">
                                     <a th:href="@{/logout}"><i class="fa fa-user"></i> Logout</a>
                                 </div>
