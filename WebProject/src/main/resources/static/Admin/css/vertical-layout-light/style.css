@@ -16279,9 +16279,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
   margin-top: 0.5rem !important;
 }
 
-.mt-3, .template-demo > .btn, .ajax-upload-dragdrop .template-demo > .ajax-file-upload, .swal2-modal .swal2-buttonswrapper .template-demo > .swal2-styled, .template-demo > .btn-toolbar {
-  margin-top: 1rem !important;
-}
+
 
 .mt-4 {
   margin-top: 1.5rem !important;
@@ -16485,7 +16483,7 @@ fieldset:disabled .swal2-modal .swal2-buttonswrapper .swal2-styled,
 }
 
 .pt-5 {
-  padding-top: 3rem !important;
+ 
 }
 
 .pe-0 {

@@ -4,13 +4,13 @@ layout:decorate="~{Layouts/loginlayout.html}">
   <head>
   </head>
   <body>
-    <section layout:fragment="content" class="vh-100">
+    <section layout:fragment="content" class="vh-100 container">
           <div class="row justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
+            <div class="col-md-9 col-lg-6 col-xl-6">
               <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
                 class="img-fluid" alt="Sample image">
             </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <div class="col-md-8 col-lg-6 col-xl-5 offset-xl-1">
               <form th:action="@{/j_spring_security_check}" method="post">
                 <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                   <p class="lead fw-normal mb-0 me-3">Sign in with</p>
@@ -29,6 +29,10 @@ layout:decorate="~{Layouts/loginlayout.html}">
       
                 <div class="divider d-flex align-items-center my-4">
                   <p class="text-center fw-bold mx-3 mb-0">Or</p>
+                </div>
+
+                <div th:if="${param.error !=null}" class="justify-content-center">
+                  <span style="color: red;">Wrong the username or password</span>
                 </div>
       
                 <!-- Email input -->
