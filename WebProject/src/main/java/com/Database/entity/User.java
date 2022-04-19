@@ -31,10 +31,10 @@ public class User implements Serializable{
 	@Column(columnDefinition = "nvarchar(255) not null")
 	private String displayName;
 	
-	@Column(columnDefinition = "varchar(50) default 'ROLE_USER'")
+	@Column(columnDefinition = "varchar(50) not null default 'ROLE_USER'")
 	private String role;
 	
-	@Column(nullable = false)
+	@Column(columnDefinition = "boolean default false")
 	private boolean enable;
 	
 	@Column(nullable = true)
