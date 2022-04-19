@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/User")
+@RequestMapping("/Admin/User")
 public class UserController {
 
 	@Autowired
@@ -23,7 +23,7 @@ public class UserController {
 	public String viewUser(ModelMap model) {
 		List<User> list= userService.getListUser();
 		model.addAttribute("list",list);
-		return "Admin/listuser";
+		return "Admin/User/user";
 	}
 	
 }
