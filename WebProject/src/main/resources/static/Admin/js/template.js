@@ -123,7 +123,6 @@
     else {
       document.querySelector('.page-body-wrapper').classList.add('pt-0');
       document.querySelector('.navbar').classList.add('pt-5');
-      document.querySelector('.navbar').classList.add('mt-3');
       
     }
   });
