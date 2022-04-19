@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/Categories")
+@RequestMapping("/Admin/Categories")
 public class CategoriesController {
-   
+    @GetMapping("/List")
+    public String CategoriesShow(){
+        return "Admin/categories";
+    }
 }
