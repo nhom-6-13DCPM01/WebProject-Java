@@ -444,16 +444,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </li>
           <li class="nav-item nav-category">pages</li>
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="/Admin/#auth" aria-expanded="false" aria-controls="auth">
+            <a class="nav-link" th:href="@{/Admin/User/List}">
               <i class="menu-icon mdi mdi-account-circle-outline"></i>
               <span class="menu-title">User Pages</span>
-              <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="/Admin/pages/samples/login.html"> Login </a></li>
-              </ul>
-            </div>
           </li>
           <li class="nav-item nav-category">help</li>
           <li class="nav-item">
