@@ -2,7 +2,7 @@ package com.Database.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,7 +43,7 @@ public class Order implements Serializable{
 	private Date deliveryDate;
 	
 	@OneToMany(mappedBy = "order" , cascade = CascadeType.ALL)
-	private Set<OrderDetail> orderDetails;
+	private Collection<OrderDetail> orderDetails;
 	
 	@ManyToOne
 	@JoinColumn(name= "userId")
@@ -97,11 +97,11 @@ public class Order implements Serializable{
 		this.deliveryDate = deliveryDate;
 	}
 
-	public Set<OrderDetail> getOrderDetails() {
+	public Collection<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+	public void setOrderDetails(Collection<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
@@ -120,7 +120,7 @@ public class Order implements Serializable{
 	}
 
 	public Order(Long orderId, String address, String phone, String status, Date creationDate, Date deliveryDate,
-			Set<OrderDetail> orderDetails, User user) {
+			Collection<OrderDetail> orderDetails, User user) {
 		super();
 		this.orderId = orderId;
 		this.address = address;
