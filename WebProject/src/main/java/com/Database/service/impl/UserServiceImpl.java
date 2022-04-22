@@ -1,7 +1,7 @@
 package com.Database.service.impl;
 
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -11,6 +11,10 @@ import com.Database.repository.UserRepository;
 import com.Database.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,9 +35,10 @@ public class UserServiceImpl implements UserService{
     private JavaMailSender mailSender;
 
 	@Override
-	public List<User> getListUser() {
-		List<User> list = userRepository.findAll();
-		return list;
+	public Page<User> getListUser(Integer page,Integer size) {
+		Pageable pageable = PageRequest.of(page,size);
+
+		return userRepository.findAll(pageable);
 	}
 
 	@Override
@@ -89,15 +94,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean verify(String verificationCode) {
 		User user = userRepository.findByVerificationCode(verificationCode);
-    if (user == null || user.isEnable()) {
-        return false;
-    } else {
-        user.setOtpCode(null);
-        user.setEnable(true);
-		user.setRole("ROLE_USER");
-        userRepository.save(user);
+    	if (user == null || user.isEnable()) 
+		{
+        	return false;
+    	} 
+		else 
+		{
+        	user.setOtpCode(null);
+        	user.setEnable(true);
+			user.setRole("ROLE_USER");
+        	userRepository.save(user);
          
-        return true;
-    }
+        	return true;
+    	}
 	}	
 }

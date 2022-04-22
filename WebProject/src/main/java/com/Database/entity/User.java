@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
 @Table(name = "Users")
@@ -42,7 +45,8 @@ public class User implements Serializable{
 	
 	@Column(nullable = true)
 	private Date requestOtp;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
 	private Set<Order> orders;
 

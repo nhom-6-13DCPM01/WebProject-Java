@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
+
+<head>
+</head>
+
+<body>
+  <div >
+    <div id="tbodyUser" th:fragment="usertbody" class="card-body">
+      <div id="table" class="table-editable">
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+      <thead>
+        <tr>
+          <th class="text-center">Id User</th>
+          <th class="text-center">Email</th>
+          <th class="text-center">Display Name</th>
+          <th class="text-center">Role</th>
+          <th class="text-center">Enable</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+        <tbody >
+            <tr th:each=" listuser : ${list}">
+              <td th:text="${listuser.getUserId()}"></td>
+              <td th:text="${listuser.getEmail()}"></td>
+              <td th:text="${listuser.getDisplayName()}"></td>
+              <td th:text="${listuser.getRole()}"></td>
+              <td th:text="${listuser.isEnable()}"></td>
+              <td> 
+                <span><button type="button" class="btn btn-warning btn-rounded btn-sm my-0 waves-effect waves-light">
+                    Update
+                </button></span>
+                <span><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
+                    Remove
+                  </button></span>
+                <span><button type="button" class="btn btn-success btn-rounded btn-sm my-0 waves-effect waves-light">
+                    Detail
+                  </button></span>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+    <ul class="pagination justify-content-center" style="margin:20px 0; cursor: pointer;">
+      <li class="page-item"><a class="page-link">« First</a></li>
+      <li class="page-item"><a class="page-link">« Prev</a></li>
+      <li th:if="${list.totalPages > 0}" th:each="pageNumber : ${pageNumbers}" class="page-item"  th:classappend="${list.pageable.pageNumber}+1==${pageNumber}?'active':''"><a class="page-link" th:text="${pageNumber}"></a></li>
+      <li class="page-item"><a class="page-link">Next »></a></li>
+      <li class="page-item"><a class="page-link">Last »</a></li>
+    </ul>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
