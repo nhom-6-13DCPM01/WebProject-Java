@@ -107,5 +107,21 @@ public class UserServiceImpl implements UserService{
          
         	return true;
     	}
+	}
+
+	@Override
+	public User getUserById(long id) {
+		User user = userRepository.getById(id);
+		return user;
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		userRepository.delete(user);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		userRepository.save(user);
 	}	
 }

@@ -14,6 +14,12 @@ public interface UserService {
 
 	User getUserByEmail(String email);
 
+	User getUserById(long id);
+
+	void deleteUser(User user);
+
+	void updateUser(User user);
+
 	void register(User user, String url) throws UnsupportedEncodingException, MessagingException;
 
 	void sendVerificationEmail(User user, String siteURL) throws MessagingException, UnsupportedEncodingException;

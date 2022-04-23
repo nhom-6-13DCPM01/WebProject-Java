@@ -28,61 +28,10 @@ function fetchUsers(startPage) {
     });
 }
 
-function buildPagination(response) {
-    totalPages = response.totalPages;
-
-    var pageNumber = response.pageable.pageNumber;
-    
-    var numLinks = 10;
-    
-    // print 'previous' link only if not on page one
-    var first = '';
-    var prev = '';
-    if (pageNumber > 0) {
-        if(pageNumber !== 0) {
-            first = '<li class="page-item"><a class="page-link">« First</a></li>';
-        }
-        prev = '<li class="page-item"><a class="page-link">« Prev</a></li>';
-    } else {
-        prev = ''; // on the page one, don't show 'previous' link
-        first = ''; // nor 'first page' link
-    }
-    
-    // print 'next' link only if not on the last page
-    var next = '';
-    var last = '';
-    if (pageNumber < totalPages) {
-        if(pageNumber !== totalPages - 1) {
-            next = '<li class="page-item"><a class="page-link">Next »></a></li>';				
-            last = '<li class="page-item"><a class="page-link">Last »</a></li>';
-        }
-    } else {
-        next = ''; // on the last page, don't show 'next' link
-        last = ''; // nor 'last page' link
-    }
-    
-    var start = pageNumber - (pageNumber % numLinks) + 1;
-    var end = start + numLinks - 1;
-    end = Math.min(totalPages, end);
-    var pagingLink = '';
-    
-    for (var i = start; i <= end; i++) {
-        if (i == pageNumber + 1) {
-            pagingLink += '<li class="page-item active"><a class="page-link"> ' + i + ' </a></li>'; // no need to create a link to current page
-        } else {
-            pagingLink += '<li class="page-item"><a class="page-link"> ' + i + ' </a></li>';
-        }
-    }
-    
-    // return the page navigation link
-    pagingLink = first + prev + pagingLink + next + last;
-    
-    $("ul.pagination").append(pagingLink);
-}
-
 $(document).on("click", "ul.pagination li a", function() {
     var data = $(this).attr('data');
     let val = $(this).text();
+    let totalPages = $("#lastPages").val();
     console.log('val: ' + val);
 
     // click on the NEXT tag
@@ -90,13 +39,11 @@ $(document).on("click", "ul.pagination li a", function() {
         let currentActive = $("li.active");
         fetchUsers(0);
         $("li.active").removeClass("active");
-          // add .active to next-pagination li
-          currentActive.next().addClass("active");
     } else if(val.toUpperCase() === "LAST »") {
-        fetchUsers(totalPages - 1);
+        let currentActive = $("li.active");
+        fetchUsers(totalPages-1);
         $("li.active").removeClass("active");
-          // add .active to next-pagination li
-          currentActive.next().addClass("active");
+
     } else if(val.toUpperCase() === "NEXT »") {
           let activeValue = parseInt($("ul.pagination li.active").text());
           if(activeValue < totalPages){
@@ -108,7 +55,7 @@ $(document).on("click", "ul.pagination li a", function() {
               // add .active to next-pagination li
               currentActive.next().addClass("active");
           }
-      } else if(val.toUpperCase() === " PREV") {
+      } else if(val.toUpperCase() === "« PREV") {
           let activeValue = parseInt($("ul.pagination li.active").text());
           if(activeValue > 1) {
               // get the previous page
@@ -133,3 +80,8 @@ $(document).on("click", "ul.pagination li a", function() {
     fetchUsers(0);
 })();
 });
+
+function Del(name) {
+  return confirm("Bạn có chắc muốn xóa " + name + "?");
+}
+
