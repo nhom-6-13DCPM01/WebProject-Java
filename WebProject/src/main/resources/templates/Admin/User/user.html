@@ -6,44 +6,21 @@
 <body>
   <!-- Editable table -->
 <div layout:fragment="content">
+  <div th:if="${action}=='Warning!'" class="alert alert-warning alert-dismissible" style="font-size: 25px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong th:text="${action}"></strong><span th:text="' '+${message}"></span>
+  </div>
+  <div th:if="${action}=='Error!'" class="alert alert-danger alert-dismissible" style="font-size: 25px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong th:text="${action}"></strong><span th:text="' '+${message}"></span>
+  </div>
+  <div th:if="${action}=='Success'" class="alert alert-success alert-dismissible" style="font-size: 25px;">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <strong th:text="${action}"></strong><span th:text="' '+${message}"></span>
+  </div>
     <div class="card mb-4">
         <h3 class="card-header text-center font-weight-bold text-uppercase py-4">User list</h3>
-        <div class="card-body">
-          <div id="table" class="table-editable">
-            <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
-            <table class="table table-bordered table-responsive-md table-striped text-center">
-              <thead>
-                <tr>
-                  <th class="text-center">Id User</th>
-                  <th class="text-center">Email</th>
-                  <th class="text-center">Display Name</th>
-                  <th class="text-center">Role</th>
-                  <th class="text-center">Enable</th>
-                  <th class="text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr th:each=" listuser : ${list}">
-                  <td th:text="${listuser.getUserId()}"></td>
-                  <td th:text="${listuser.getEmail()}"></td>
-                  <td th:text="${listuser.getDisplayName()}"></td>
-                  <td th:text="${listuser.getRole()}"></td>
-                  <td th:text="${listuser.isEnable()}"></td>
-                  <td> 
-                    <span><button type="button" class="btn btn-warning btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Update
-                    </button></span>
-                    <span><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                      </button></span>
-                    <span><button type="button" class="btn btn-success btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Detail
-                      </button></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div id="tbodyUser" class="card-body">
         </div>
       </div>
 </div>

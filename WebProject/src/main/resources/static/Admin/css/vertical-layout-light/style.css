@@ -24947,9 +24947,13 @@ dl li {
 }
 
 .pagination-info .page-item:hover .page-link {
-  background: #6cd4ff;
+  background: #e9d969;
   border-color: #52CDFF;
   color: #ffffff;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: #e9d969;
 }
 
 .pagination-warning .page-item.active .page-link {

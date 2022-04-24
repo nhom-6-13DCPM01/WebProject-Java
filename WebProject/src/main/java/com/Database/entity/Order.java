@@ -15,6 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+
+
+
 @Entity
 @Table(name = "Orders")
 public class Order implements Serializable{
@@ -46,6 +53,7 @@ public class Order implements Serializable{
 	@OneToMany(mappedBy = "order" , cascade = CascadeType.ALL)
 	private Collection<OrderDetail> orderDetails;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name= "userId")
 	private User user;
