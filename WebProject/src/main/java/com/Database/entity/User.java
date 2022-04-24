@@ -15,6 +15,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 
 
 @Entity
@@ -23,6 +26,7 @@ public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Long userId;
 	
 	@Column(columnDefinition = "nvarchar(255) not null")

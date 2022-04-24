@@ -37,9 +37,6 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                 <span><a type="button" th:attr="onclick='return Del(\'' + ${listuser.getEmail()} +  '\');'" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light" th:href="@{/Admin/User/Delete?id={id}(id=${listuser.getUserId()})}">
                     Remove
                 </a></span>
-                <span><a type="button" class="btn btn-success btn-rounded btn-sm my-0 waves-effect waves-light" th:href="@{/Admin/User/Detail?id={id}(id=${listuser.getUserId()})}">
-                    Detail
-                </a></span>
               </td>
             </tr>
         </tbody>
