@@ -13,6 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
+
 
 @Entity
 @Table(name = "Users")
@@ -20,6 +26,7 @@ public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Long userId;
 	
 	@Column(columnDefinition = "nvarchar(255) not null")
@@ -42,7 +49,8 @@ public class User implements Serializable{
 	
 	@Column(nullable = true)
 	private Date requestOtp;
-	
+
+	@JsonIgnore
 	@OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
 	private Set<Order> orders;
 
