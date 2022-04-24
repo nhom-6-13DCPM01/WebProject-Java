@@ -58,6 +58,6 @@ public class ShoppingCartService implements IShoppingCartService{
 	
 	@Override
 	public double getAmount() {
-		return cart.values().stream().mapToDouble(item -> item.getPrice()).sum();
+		return cart.values().stream().mapToDouble(item -> item.getPrice() - ((item.getPrice() * item.getProduct().getDiscount())/100)).sum();
 	}
 }

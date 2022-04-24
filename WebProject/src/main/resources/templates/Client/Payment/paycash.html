@@ -30,7 +30,7 @@ body {
 
 .check {
 	margin: 0px auto;
-	width: 200px;
+	width: 50px;
 	height: 50px;
 	border-radius: 100%;
 	background: #fff;
@@ -77,15 +77,16 @@ body {
 						<div class="payment">
 							<div class="payment_header">
 								<div class="check">
-									<h1>Pay Cash</h1>
+									<i class="fa fa-cancel" aria-hidden="true"></i>
 								</div>
 							</div>
 							<div class="content">
+								<h1>Pay by cash</h1>
 								<p>
 									Total: <span th:text="${session.amountVN}"></span>
 								</p>
 								<div>
-									<a th:href="@{/Client/Payment/Recieve}">Submit</a> 
+									<a th:href="@{/Client/Payment/Recieve}">Pay</a> 
 									<a th:href="@{/Client/Payment/Delivery}">Delivery</a>
 									<a th:href="@{/Client/Payment/CancelPay}">Cancel</a>
 								</div>
