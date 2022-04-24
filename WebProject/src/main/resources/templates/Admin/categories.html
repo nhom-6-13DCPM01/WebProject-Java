@@ -1,104 +1,148 @@
 <!DOCTYPE html>
-<html lang="zxx" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{Layouts/AdminLayout.html}">
-
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layouts/adminlayout.html}">
 <head>
-    <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/docs-app/css/compiled-4.20.0.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&amp;display=swap">
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-  <!-- Editable table -->
-<div layout:fragment="content">
-    <div class="card mb-4">
-        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Editable table</h3>
-        <div class="card-body">
-          <div id="table" class="table-editable">
-            <span class="table-add float-right mb-3 mr-2"><a href="#!" class="text-success"><i class="fas fa-plus fa-2x" aria-hidden="true"></i></a></span>
-            <table class="table table-bordered table-responsive-md table-striped text-center">
-              <thead>
-                <tr>
-                  <th class="text-center">Person Name</th>
-                  <th class="text-center">Age</th>
-                  <th class="text-center">Company Name</th>
-                  <th class="text-center">Country</th>
-                  <th class="text-center">City</th>
-                  <th class="text-center">Sort</th>
-                  <th class="text-center">Remove</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="pt-3-half" contenteditable="true">Aurelia Vega</td>
-                  <td class="pt-3-half" contenteditable="true">30</td>
-                  <td class="pt-3-half" contenteditable="true">Deepends</td>
-                  <td class="pt-3-half" contenteditable="true">Spain</td>
-                  <td class="pt-3-half" contenteditable="true">Madrid</td>
-                  <td class="pt-3-half">
-                    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-                    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-                  </td>
-                  <td>
-                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                      </button></span>
-                  </td>
-                </tr>
-                <!-- This is our clonable table line -->
-                <tr>
-                  <td class="pt-3-half" contenteditable="true">Guerra Cortez</td>
-                  <td class="pt-3-half" contenteditable="true">45</td>
-                  <td class="pt-3-half" contenteditable="true">Insectus</td>
-                  <td class="pt-3-half" contenteditable="true">USA</td>
-                  <td class="pt-3-half" contenteditable="true">San Francisco</td>
-                  <td class="pt-3-half">
-                    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-                    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-                  </td>
-                  <td>
-                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                      </button></span>
-                  </td>
-                </tr>
-                <!-- This is our clonable table line -->
-                <tr>
-                  <td class="pt-3-half" contenteditable="true">Guadalupe House</td>
-                  <td class="pt-3-half" contenteditable="true">26</td>
-                  <td class="pt-3-half" contenteditable="true">Isotronic</td>
-                  <td class="pt-3-half" contenteditable="true">Germany</td>
-                  <td class="pt-3-half" contenteditable="true">Frankfurt am Main</td>
-                  <td class="pt-3-half">
-                    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-                    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-                  </td>
-                  <td>
-                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                      </button></span>
-                  </td>
-                </tr>
-                <!-- This is our clonable table line -->
-                <tr class="hide">
-                  <td class="pt-3-half" contenteditable="true">Elisa Gallagher</td>
-                  <td class="pt-3-half" contenteditable="true">31</td>
-                  <td class="pt-3-half" contenteditable="true">Portica</td>
-                  <td class="pt-3-half" contenteditable="true">United Kingdom</td>
-                  <td class="pt-3-half" contenteditable="true">London</td>
-                  <td class="pt-3-half">
-                    <span class="table-up"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-up" aria-hidden="true"></i></a></span>
-                    <span class="table-down"><a href="#!" class="indigo-text"><i class="fas fa-long-arrow-alt-down" aria-hidden="true"></i></a></span>
-                  </td>
-                  <td>
-                    <span class="table-remove"><button type="button" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light">
-                        Remove
-                      </button></span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+	<div layout:fragment="content">
+    <section>
+      <div class="bg-white border rounded-5">
+        
+      <section class="section-preview p-1">
+    
+        <div class="wrapper-editor">
+    
+    
+          <div class="block">
+            <div class="d-flex justify-content-center">
+              <p class="h5 text-primary createShowP">0 row selected</p>
+            </div>
           </div>
         </div>
+    
+          <div id="dtBasicExample_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div class="row"><div class="col-sm-12 col-md-6">
+              <div class="dataTables_length bs-select" id="dtBasicExample_length">
+                <label>Show 
+                  <select name="dtBasicExample_length" aria-controls="dtBasicExample" class="custom-select custom-select-sm form-control form-control-sm">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select> entries
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+              <div id="dtBasicExample_filter" class="dataTables_filter">
+                <label>Search:
+                  <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dtBasicExample">
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <table id="dtBasicExample" class="table table-striped table-bordered dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="dtBasicExample_info" style="width: 100%;">
+                <thead>
+                  <tr>
+                    <!--Số thứ tự lấy thẳng từ CSDL lên-->>
+                    <td class="th-sm">No.</td>
+                    <td class="th-sm">Name</td>
+                    <td></td>
+                  </tr>
+                </thead>
+                <tbody th:each="category: ${categories.pageList}">
+                  <tr>
+                    <td scope="row" th:text="${category.categoryId}"></td>
+                    <td th:text="${category.name}"></td>
+                    <td>
+                      <a th:href="@{/Admin/Categories/Delete/{id}(id=${category.categoryId})}"><button class="btn btn-danger">Delete</button></a> 
+                      <span>|</span> 
+                      <a th:href="@{/Admin/Categories/Update/{id}(id=${category.categoryId})}"><button class="btn btn-warning">Update</button></a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="text-center">
+            <a th:href="@{/Admin/Categories/Add}">
+              <button class="btn btn-info btn-rounded btn-sm">Add
+                <i class="fas fa-plus-square ml-1"></i>
+              </button>
+            </a>
+          </div>
+        <!-- <div class="row">
+          <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info" id="dtBasicExample_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
+          </div>
+          <div class="col-sm-12 col-md-7">
+            <div class="dataTables_paginate paging_simple_numbers" id="dtBasicExample_paginate">
+              <ul class="pagination">
+                <li class="paginate_button page-item previous disabled" id="dtBasicExample_previous">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="0" tabindex="0" class="page-link waves-effect">Previous</a>
+                </li>
+                <li class="paginate_button page-item active">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="1" tabindex="0" class="page-link waves-effect">1</a>
+                </li>
+                <li class="paginate_button page-item ">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="2" tabindex="0" class="page-link waves-effect">2</a>
+                </li>
+                <li class="paginate_button page-item ">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="3" tabindex="0" class="page-link waves-effect">3</a>
+                </li>
+                <li class="paginate_button page-item ">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="4" tabindex="0" class="page-link waves-effect">4</a>
+                </li>
+                <li class="paginate_button page-item ">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="5" tabindex="0" class="page-link waves-effect">5</a>
+                </li>
+                <li class="paginate_button page-item ">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="6" tabindex="0" class="page-link waves-effect">6</a>
+                </li>
+                <li class="paginate_button page-item next" id="dtBasicExample_next">
+                  <a href="#" aria-controls="dtBasicExample" data-dt-idx="7" tabindex="0" class="page-link waves-effect">Next</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li th:class="${currentIndex == 1}? 'page-item disabled' : 'page-item'">
+              <a class="page-link" th:href="@{/Admin/Categories/List}">First</a>
+            </li>
+            <li th:class="${currentIndex == 1}? 'page-item disabled': 'page-item'">
+              <a class="page-link" aria-label="Previous" th:href="@{|${baseUrl}${currentIndex - 1}|}" title='Go to previous page'>
+                <span aria-hidden="true">«</span>
+                <span class="sr-only">Previous</span></a>
+            </li>
+            <li th:each="item : ${#numbers.sequence(beginIndex,endIndex)}" th:class="${item == currentIndex ? 'page-item active' :'page-item' }">
+              <a class="page-link" th:href="@{|${baseUrl}${item}|}">
+                <span th:text='${item}'>1</span>
+            </a>
+            </li>
+            <li th:class="${currentIndex == totalPageCount}? 'page-item disabled': 'page-item'">
+              <a class="page-link" aria-label="Next" th:href="@{|${baseUrl}${currentIndex + 1}|}" title='Go to next page'>
+                <span aria-hidden="true">»</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+            <li th:class="${currentIndex == totalPageCount}? 'page-item disabled':'page-item'">
+              <a class="page-link" th:href="@{|${baseUrl}${totalPageCount}|}">Last</a>
+            </li>
+          </ul>
+        </nav>
       </div>
+    </div>
+  </section>   
+  </div>
+</section>
 </div>
 </body>
+<footer th:replace="layout :: footer"></footer>
 </html>
