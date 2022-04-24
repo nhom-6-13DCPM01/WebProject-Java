@@ -21,10 +21,9 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="#"><i class="fa fa-shopping-bag" th:href="@{/Client/ShoppingCart/Show}"></i> <span th:text="${session.sizeCart} == null ? 0 : ${session.sizeCart}"></span></a></li>
             </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            <div class="header__cart__price">item: <span th:text="${session.amountVN} == null ? 0.0 : ${session.amountVN}"></span></div>
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__language">
@@ -131,8 +130,8 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                             <li><a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
+                                    <li><a th:href="@{/Client/ShoppingCart/Show}">Shoping Cart</a></li>
+                                    <li><a th:href="@{/Client/CheckOut/Show}">Check Out</a></li>
                                     <li><a href="./blog-details.html">Blog Details</a></li>
                                 </ul>
                             </li>
@@ -144,9 +143,9 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a th:href="@{/CLient/ShoppingCart/Show}"><i class="fa fa-shopping-bag"></i> <span th:text="${session.sizeCart} == null ? 0 : ${session.sizeCart}"></span></a></li>
+                            <li><a th:href="@{/Client/ShoppingCart/Show}"><i class="fa fa-shopping-bag"></i> <span th:text="${session.sizeCart} == null ? 0 : ${session.sizeCart}"></span></a></li>
                         </ul>
-                        <div class="header__cart__price">item: <span th:text="${session.amountVN} == null ? 0 : ${session.amountVN}"></span></div>
+                        <div class="header__cart__price">item: <span th:text="${session.amountVN} == null ? 0.0 : ${session.amountVN}"></span></div>
                     </div>
                 </div>
             </div>

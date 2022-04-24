@@ -4,7 +4,7 @@
 	layout:decorate="~{Layouts/clientlayout.html}">
 <head>
 <meta charset="UTF-8">
-<title>Organi | Payment success</title>
+<title>Organi | Payment cash</title>
 <link rel="stylesheet" type="text/css"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css"
@@ -12,6 +12,7 @@
 <style type="text/css">
 body {
 	background: #f2f2f2;
+	padding: 20px
 }
 
 .payment {
@@ -29,7 +30,7 @@ body {
 
 .check {
 	margin: 0px auto;
-	width: 50px;
+	width: 200px;
 	height: 50px;
 	border-radius: 100%;
 	background: #fff;
@@ -69,25 +70,34 @@ body {
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 mx-auto mt-5">
-					<div class="payment">
-						<div class="payment_header">
-							<div class="check">
-								<i class="fa fa-check" aria-hidden="true"></i>
+		<section class="checkout spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 mx-auto mt-5">
+						<div class="payment">
+							<div class="payment_header">
+								<div class="check">
+									<h1>Pay Cash</h1>
+								</div>
+							</div>
+							<div class="content">
+								<p>
+									Total: <span th:text="${session.amountVN}"></span>
+								</p>
+								<div>
+									<a th:href="@{/Client/Payment/Recieve}">Submit</a> 
+									<a th:href="@{/Client/Payment/Delivery}">Delivery</a>
+									<a th:href="@{/Client/Payment/CancelPay}">Cancel</a>
+								</div>
 							</div>
 						</div>
-						<div class="content">
-							<h1>Payment Success !</h1>
-							<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi</p>
-							<a th:href="@{/Client/Payment/RemoveSession}">Go to Home</a>
-						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 	</div>
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

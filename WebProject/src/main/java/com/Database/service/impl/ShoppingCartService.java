@@ -35,6 +35,10 @@ public class ShoppingCartService implements IShoppingCartService{
 		CartItem item = cart.get(productId);
 		item.setQuantity(quantity);
 		item.setPrice(quantity * item.getProduct().getPrice());
+		
+		if(item.getQuantity() <= 0) {
+			removeItem(productId);
+		}
 	}
 	
 	@Override

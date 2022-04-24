@@ -42,7 +42,7 @@ public class ShoppingCartController {
 	}
 	
 	@GetMapping("/Add/{id}")
-	public String addItem(@PathVariable("id")long id) {
+	public String addItem(@PathVariable("id")Long id) {
 		Product product = productService.getProductById(id);
 		CartItem item = new CartItem(product, 1);
 		shoppingCartService.addItem(item);
@@ -50,13 +50,13 @@ public class ShoppingCartController {
 	}
 	
 	@GetMapping("/Delete/{id}")
-	public String deleteItem(@PathVariable("id")long id) {
+	public String deleteItem(@PathVariable("id")Long id) {
 		shoppingCartService.removeItem(id);
 		return "redirect:/Client/ShoppingCart/Show";
 	}
 	
 	@PostMapping("/Update")
-	public String updateCart(@RequestParam("id") int id, @RequestParam("quantity")int quantity) {
+	public String updateCart(@RequestParam("id")Long id, @RequestParam("quantity")Integer quantity) {
 		shoppingCartService.updateItem(id, quantity);
 		return "redirect:/Client/ShoppingCart/Show";
 	}

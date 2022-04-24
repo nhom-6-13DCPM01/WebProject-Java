@@ -23,4 +23,8 @@ public class PaypalUtils {
 	    }
 	    return url.toString();
 	}
+	
+	public static double chuyenDoiTienVietThanhDola(double price) {
+		return price / 23000;
+	}
 }

@@ -1,7 +1,5 @@
 package com.Controller.Client.ShoppingCart;
 
-import java.sql.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.Database.entity.Order;
 import com.Database.entity.User;
 import com.Database.service.MyUserDetail;
 
@@ -20,7 +17,6 @@ import com.Database.service.MyUserDetail;
 @RequestMapping("/Client/CheckOut")
 public class CheckOutController {
 	private String payway;
-	private Order order;
 	
 	@GetMapping("/Show")
 	public String index() {
@@ -28,14 +24,20 @@ public class CheckOutController {
 	}
 	
 	@PostMapping("/CheckLogin")
-	public String checkLogin(@AuthenticationPrincipal MyUserDetail userDetails,@ModelAttribute("address")String address, @ModelAttribute("phone")String phone, HttpServletRequest request) {
-		payway = request.getParameter("payment");
+	public String CheckLogin(@AuthenticationPrincipal MyUserDetail userDetails,@ModelAttribute("address")String address, @ModelAttribute("phone")String phone, HttpServletRequest request) {
 		User user = null;
+		payway = (String)  request.getParameter("payment");
+		HttpSession session = request.getSession();
+		
+		session.setAttribute("phone", phone);
+		session.setAttribute("address", address);
+		
 		if(userDetails !=null){
 			user = userDetails.getUser();
-			order = new Order(null, address, phone, "CHƯA THANH TOÁN", new Date(System.currentTimeMillis()), null, null, user);
+			session.setAttribute("user", user);
 		}
 		if(user == null){
+			session.setAttribute("CheckLogin", "yes");
 			return "redirect:/Authentication/Login";
 		}
 		return "redirect:/Client/CheckOut/ConfirmTheWayToPay";
@@ -43,11 +45,10 @@ public class CheckOutController {
 	
 	@GetMapping("/ConfirmTheWayToPay")
 	public String redirectPayment(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		session.setAttribute("order", order);
-		if(payway == "paypal")
-			return "";
-		else
-			return "";
+		if(payway.equals("paypal"))
+			return "redirect:/Client/Payment/PayByPaypal";
+		if(payway.equals("paycash"))
+			return "redirect:/Client/Payment/PayCash";
+		return "redirect:/Client/CheckOut/Show";
 	}
 }

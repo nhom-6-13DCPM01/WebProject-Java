@@ -1,5 +1,6 @@
 package com.Database.service.impl;
 
+import com.Database.entity.OrderDetail;
 import com.Database.repository.OrderDetailRepository;
 import com.Database.service.OrderDetailService;
 
@@ -10,4 +11,9 @@ import org.springframework.stereotype.Service;
 public class OrderDetailServiceImpl implements OrderDetailService{
 	@Autowired
 	OrderDetailRepository orderDetailRepository;
+	
+	@Override
+	public OrderDetail saveOrderDetail(OrderDetail orderDetail) {
+		return orderDetailRepository.save(orderDetail);
+	}
 }

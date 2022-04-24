@@ -75,13 +75,14 @@ body {
 					<div class="payment">
 						<div class="payment_header">
 							<div class="check">
-								<i class="fa fa-check" aria-hidden="true"></i>
+								<i class="fa fa-cancel" aria-hidden="true"></i>
 							</div>
 						</div>
 						<div class="content">
-							<h1>Payment Success !</h1>
-							<p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi</p>
-							<a th:href="@{/Client/Payment/RemoveSession}">Go to Home</a>
+							<h1>Payment Cancel !</h1>
+							<p>Bạn muốn quay lại tiếp tục hay dừng mua. Quyền lựa chọn ở bạn</p>
+							<a th:href="@{/Client/Payment/ContinueBuying}">Buy some more</a>
+							<a th:href="@{/Client/Payment/RemoveSession}">Cancel</a>
 						</div>
 
 					</div>
