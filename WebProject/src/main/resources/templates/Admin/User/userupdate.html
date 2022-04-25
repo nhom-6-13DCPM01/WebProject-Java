@@ -76,8 +76,8 @@
                     <td th:text="${listOrder.getDeliveryDate()}"></td>
                     <td>
                       <span>
-                        <a type="button" class="btn btn-success btn-rounded btn-sm my-0 waves-effect waves-light" th:href="@{/Admin/User/ViewUser}">
-                          Detail
+                        <a type="button" class="btn btn-success btn-rounded btn-sm my-0 waves-effect waves-light" 
+                        th:href="@{/Admin/User/Detail/{id} (id = ${listOrder.user.userId})}">Detail
                         </a>
                       </span>
                     </td>

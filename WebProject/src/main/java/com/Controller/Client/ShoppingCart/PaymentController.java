@@ -141,6 +141,7 @@ public class PaymentController {
 		session.removeAttribute("phone");
 		session.removeAttribute("address");
 		session.removeAttribute("CheckLogin");
+		session.removeAttribute("product");
 		return "redirect:/Home";
 	}
 	
