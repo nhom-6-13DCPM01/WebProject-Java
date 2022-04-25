@@ -103,9 +103,11 @@
 												<h5 th:text="${item.product.name}"></h5></td>
 											<td class="shoping__cart__price"
 												th:text="${item.product.price}" />
-											<td><input class="col-md-5 quantity" type="number"
-												name="quantity" min="0" th:value="${item.quantity}"
-												onblur="this.form.submit()" /></td>
+											<td>
+												<input class="col-md-5 quantity" type="number"
+												name="quantity" min="0" th:max="${item.product.quantity}" th:value="${item.quantity}"
+												onblur="this.form.submit()" />
+											</td>
 											<td class="shoping__cart__total" th:text="${item.priceVN}"></td>
 											<td class="shoping__cart__item__close"><a
 												th:href="@{/Client/ShoppingCart/Delete/{id} (id = ${item.product.productId})}"><span

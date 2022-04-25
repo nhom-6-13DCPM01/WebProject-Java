@@ -71,13 +71,9 @@ public class OrderDetailController {
 		return "Admin/OrderDetail/showorderdetail";
 	}
 	
-	@PostMapping("/Save")
-	public String saveOrder() {
-		return "";
-	}
-	
 	public List<String> getListStatus() {
 		List<String> listStatus = new ArrayList<String>();
+		listStatus.add("CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG");
 		listStatus.add("ĐÃ THANH TOÁN");
 		listStatus.add("ĐANG GIAO HÀNG");
 		listStatus.add("ĐÃ GIAO HÀNG THÀNH CÔNG");
