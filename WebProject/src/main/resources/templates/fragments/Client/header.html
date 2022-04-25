@@ -137,6 +137,10 @@ xmlns:sec="https://www.thymeLeaf.org/thymeLeaf-extras-springsecurity5">
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
                             <li><a href="./contact.html">Contact</a></li>
+                            <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Home') ? 'active':''}"><a th:href="@{/Home}">Home</a></li>
+                            <li th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Client/Product/') ? 'active':''}"><a th:href="@{/Client/Product/Shop}">Shop</a></li>
+                            <li><a th:href="@{/Client/ShoppingCart/Show}">Shoping Cart</a></li>
+                            <li><a th:href="@{/Client/CheckOut/Show}">Check Out</a></li>
                         </ul>
                     </nav>
                 </div>
