@@ -4,6 +4,7 @@ import com.Database.entity.Product;
 
 import org.springframework.data.domain.Page;
 
+
 public interface ProductService {
 
     Page<Product> getListProduct(Integer page,Integer size);
