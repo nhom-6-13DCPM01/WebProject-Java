@@ -29,6 +29,7 @@ public class OrderDetailController {
 	public String showOrderDetail(HttpServletRequest request, @PathVariable("id")long id) {
 		HttpSession session = request.getSession();
 		order = orderService.getById(id);
+		session.setAttribute("id", id);
 		session.setAttribute("order", order);
 		session.setAttribute("orderDetails", null);
 		return "redirect:/Admin/OrderDetail/Show/page/1";

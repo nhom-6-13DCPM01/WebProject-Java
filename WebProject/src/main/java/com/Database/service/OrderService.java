@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.Database.entity.Order;
 import com.Database.entity.OrderDetail;
@@ -19,5 +20,7 @@ public interface OrderService {
 	Order getById(long id);
 
 	List<OrderDetail> getByIdList(long id);
+
+	List<Order> getAllSort(Sort sort);
 
 }

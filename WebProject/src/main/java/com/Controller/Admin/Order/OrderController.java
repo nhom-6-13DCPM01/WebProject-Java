@@ -6,8 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import com.Database.service.OrderService;
 public class OrderController {
 	@Autowired
 	private OrderService orderService;
+	private Sort sort = Sort.by("deliveryDate").ascending();
 	
 	@GetMapping("/Show")
 	public String showOrder(Model model,HttpServletRequest request
@@ -37,7 +40,7 @@ public class OrderController {
 	public String showEmployeePage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("orders");
 		int pagesize = 5;
-		List<Order> list = orderService.getAll();
+		List<Order> list = orderService.getAllSort(sort);
 		
 		if (pages == null) {
 			//Khởi tạo pageListHolder và set page size
@@ -67,8 +70,26 @@ public class OrderController {
 	}
 	
 	@PostMapping("/Save")
-	public String saveOrder(@ModelAttribute("order")Order order, HttpServletRequest request) {
+	public String saveOrder(@ModelAttribute("order")Order order, 
+			RedirectAttributes redirect, BindingResult result, HttpServletRequest request) {
+		if (result.hasErrors()) {
+			long id = (long) request.getSession().getAttribute("id");
+			return "redirect:/Admin/OrderDetail/Show/" + String.valueOf(id);
+		}
+		redirect.addFlashAttribute("success", "Saved order successfully!");
 		orderService.saveOrder(order);
+		return "redirect:/Admin/Order/Show";
+	}
+	
+	@GetMapping("/ASC")
+	public String ascList() {
+		sort = Sort.by("deliveryDate").ascending();
+		return "redirect:/Admin/Order/Show";
+	}
+	
+	@GetMapping("/DES")
+	public String desList() {
+		sort = Sort.by("deliveryDate").descending();
 		return "redirect:/Admin/Order/Show";
 	}
 }

@@ -12,6 +12,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,6 +28,11 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public Page<Order> getAllPage(Pageable pageable){
 		return orderRepository.findAll(pageable);
+	}
+	
+	@Override
+	public List<Order> getAllSort(Sort sort){
+		return orderRepository.findAll(sort);
 	}
 	
 	@Override
