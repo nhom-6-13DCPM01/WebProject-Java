@@ -47,7 +47,7 @@ public class Product implements Serializable{
 	private String description;
 
 	@Column(columnDefinition = "integer default 0")
-	private int Discount;
+	private int discount;
 
 	@Column(nullable = false)
 	private Date creationDate;
@@ -128,11 +128,11 @@ public class Product implements Serializable{
 	}
 
 	public int getDiscount() {
-		return Discount;
+		return discount;
 	}
 
 	public void setDiscount(int discount) {
-		Discount = discount;
+		this.discount = discount;
 	}
 
 	public Date getCreationDate() {
@@ -184,7 +184,7 @@ public class Product implements Serializable{
 		this.image = image;
 		this.views = views;
 		this.description = description;
-		Discount = discount;
+		this.discount = discount;
 		this.creationDate = creationDate;
 		this.category = category;
 		this.brand = brand;
