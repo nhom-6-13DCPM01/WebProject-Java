@@ -1,5 +1,6 @@
 package com.Database.repository;
 
+
 import com.Database.entity.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;

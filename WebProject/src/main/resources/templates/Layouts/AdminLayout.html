@@ -391,8 +391,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Categories') ? 'active':''}"> <a class="nav-link"  th:href="@{/Admin/Categories/List}">Sản Phẩm</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/Admin/pages/ui-features/dropdowns.html">Loại Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" >Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Categories') ? 'active':''}" th:href="@{/Admin/Categories/List}">Loại Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/Admin/pages/ui-features/typography.html">Đơn Hàng</a></li>
               </ul>
             </div>
@@ -490,9 +490,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.10.2/umd/popper.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>-->
 	
-  <!-- plugins:js -->
-  <script th:inline="javascript" th:src="@{/Admin/vendors/js/table-pagination.js}"></script>
-  <script th:src="@{/Admin/vendors/js/vendor.bundle.base.js}"></script>
+  <script th:inline="javascript" th:src="@{/Admin/vendors/js/table-pagination.js}"></script> 
+  <!-- plugins:js --><script th:src="@{/Admin/vendors/js/vendor.bundle.base.js}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script th:src="@{/Admin/vendors/chart.js/Chart.min.js}"></script>
@@ -507,6 +506,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <script th:src="@{/Admin/js/settings.js}"></script>
   <script th:src="@{/Admin/js/todolist.js}"></script>
   <script th:src="@{/Admin/js/add.js}"></script>
+  <script th:src="@{/Admin/js/cate.js}"></script>
+ 
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script th:src="@{/Admin/js/jquery.cookie.js}" type="text/javascript"></script>

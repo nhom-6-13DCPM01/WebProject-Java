@@ -1,7 +1,7 @@
 package com.Database.entity;
 
 import java.io.Serializable;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,7 +25,7 @@ public class Category implements Serializable{
 	private String name;
 	
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-	private Set<Product> products;
+	private List<Product> products;
 
 	public Long getCategoryId() {
 		return categoryId;
@@ -43,11 +43,11 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
@@ -56,7 +56,7 @@ public class Category implements Serializable{
 		super();
 	}
 
-	public Category(Long categoryId, String name, Set<Product> products) {
+	public Category(Long categoryId, String name, List<Product> products) {
 		super();
 		this.categoryId = categoryId;
 		this.name = name;
