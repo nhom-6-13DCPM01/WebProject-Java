@@ -1,11 +1,13 @@
 package com.Database.service.impl;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import com.Database.repository.CategoryRepository;
 import com.Database.service.CategoryService;
 import com.Database.entity.Category;
+import com.Database.entity.Product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +18,18 @@ public class CategoryServiceImpl implements CategoryService {
     CategoryRepository categoryRepository;
 
     @Override
-    public List<Category> getAll() {
-        return categoryRepository.findAll();
+    public List<Product> getAllProductByIdCategory(long id) {
+        List<Product> products = new ArrayList<Product>();
+        Optional<Category> category = getById(id);
+        if(category.isPresent()){
+            for(Product product : category.get().getProducts()){
+                if(product != null)
+                    products.add(product);
+            }
+        }
+        return products;
     }
+
     @Override
     public List<Category> findAll() {
         return categoryRepository.findAll();

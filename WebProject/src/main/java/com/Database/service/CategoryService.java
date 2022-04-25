@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import com.Database.service.CategoryService;
 import com.Database.entity.Category;
+import com.Database.entity.Product;
 
 public interface CategoryService {
-    public List<Category> getAll();
+    public List<Product> getAllProductByIdCategory(long id);
+
     public List<Category> findAll();
 
     public Optional<Category> getById(long id);
