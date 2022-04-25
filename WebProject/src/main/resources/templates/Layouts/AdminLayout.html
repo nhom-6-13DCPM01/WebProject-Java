@@ -393,7 +393,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
               <ul class="nav flex-column sub-menu">
                 <li class="nav-item" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Categories') ? 'active':''}"> <a class="nav-link"  th:href="@{/Admin/Categories/List}">Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" href="/Admin/pages/ui-features/dropdowns.html">Loại Sản Phẩm</a></li>
-                <li class="nav-item"> <a class="nav-link" href="/Admin/pages/ui-features/typography.html">Đơn Hàng</a></li>
+                <li class="nav-item"> <a class="nav-link" th:href="@{/Admin/Order/Show}">Đơn Hàng</a></li>
               </ul>
             </div>
           </li>

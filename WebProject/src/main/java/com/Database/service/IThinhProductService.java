@@ -10,4 +10,6 @@ public interface IThinhProductService {
 
 	Product getProductById(long id);
 
+	Product save(Product product);
+
 }

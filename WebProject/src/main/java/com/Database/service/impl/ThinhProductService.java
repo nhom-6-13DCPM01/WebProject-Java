@@ -25,4 +25,9 @@ public class ThinhProductService implements IThinhProductService{
 		Optional<Product> product = productRepository.findById(id);
 		return product.get();
 	}
+	
+	@Override
+	public Product save(Product product) {
+		return productRepository.save(product);
+	}
 }

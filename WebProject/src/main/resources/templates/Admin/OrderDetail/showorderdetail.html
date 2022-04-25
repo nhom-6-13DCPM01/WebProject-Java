@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{Layouts/adminlayout.html}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Admin | Order detail</title>
+<style type="text/css">
+#table {
+	width: 950px;
+	overflow-x: auto;
+}
+
+#pagination {
+	padding-top: 50px;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="content">
+		<form th:action="@{/Admin/OrderDetail/Save}" th:object="${order}">
+			<div class="form-group">
+				<label for="name">Mã hóa đơn: </label>
+				<span th:text="${order.orderId}"></span>
+			</div>
+			<div class="form-group">
+				<label for="name">Tên người dùng: </label>
+				<span th:text="${order.user} == null ? Unknow : ${order.user.displayName}"></span>
+			</div>
+			<div class="form-group">
+				<label for="name">Địa chỉ</label>
+				<span th:text="${order.address}"></span>
+			</div>
+			<div class="form-floating">
+				<select name="status" class="form-select" id="floatingSelect" aria-label="Floating label select example">
+					<option th:field="*{status}" th:each="status:${statuses}" th:value="${status}" th:text="${status}"></option>
+				</select> <label for="floatingSelect">Status</label>
+			</div>
+			<div class="form-group">
+				<label for="name">Ngày tạo</label> 
+				<span th:text="${order.creationDate}"></span>
+			</div>
+			<div class="form-group">
+				<label for="name">Ngày giao</label>
+				<span th:text="${order.deliveryDate}"></span>
+			</div>
+			<div class="container">
+				<div id="table">
+					<table
+						class="table table-borderless table-striped table-dark table-sm">
+						<thead id="head" class="table-info">
+							<th>Mã hóa đơn chi tiết</th>
+							<th>Tên sản phẩm</th>
+							<th>Số lượng</th>
+							<th>Tổng tiền</th>
+						</thead>
+						<tbody th:each="orderDetail : ${orderDetails.pageList}">
+							<td th:text="${orderDetail.OrderDetailId}"></td>
+							<td th:text="${orderDetail.product.name}"></td>
+							<td th:text="${orderDetail.quantity}"></td>
+							<td th:text="${orderDetail.total}"></td>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

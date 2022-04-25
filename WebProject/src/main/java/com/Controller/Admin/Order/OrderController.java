@@ -2,11 +2,17 @@ package com.Controller.Admin.Order;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Database.entity.Order;
 import com.Database.service.OrderService;
@@ -18,9 +24,44 @@ public class OrderController {
 	private OrderService orderService;
 	
 	@GetMapping("/Show")
-	public String showOrder(Model model) {
-		List<Order> orders = orderService.getAll(); 
-		model.addAttribute("orders", orders);
+	public String showOrder(Model model,HttpServletRequest request
+			,RedirectAttributes redirect) {
+		request.getSession().setAttribute("orders", null);
+		if(model.asMap().get("success") != null)
+			redirect.addFlashAttribute("success",model.asMap().get("success").toString());
+		return "redirect:/Admin/Order/Show/page/1";
+	}
+	
+	@GetMapping("Show/page/{pageNumber}")
+	public String showEmployeePage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("orders");
+		int pagesize = 5;
+		List<Order> list = orderService.getAll();
+		
+		if (pages == null) {
+			//Khởi tạo pageListHolder và set page size
+			pages = new PagedListHolder<>(list);
+			pages.setPageSize(pagesize);
+		} else {
+			final int goToPage = pageNumber - 1;
+			if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+				pages.setPage(goToPage);
+			}
+		}
+		request.getSession().setAttribute("orders", pages);
+		
+		int current = pages.getPage() + 1;
+		int begin = Math.max(1, current - list.size());
+		int end = Math.min(begin + 5, pages.getPageCount());
+		int totalPageCount = pages.getPageCount();
+		String baseUrl = "/Admin/Order/Show/page/";
+		
+		model.addAttribute("beginIndex", begin);
+		model.addAttribute("endIndex", end);
+		model.addAttribute("currentIndex", current);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("baseUrl", baseUrl);
+		model.addAttribute("employees", pages);
 		return "Admin/Order/showorders";
 	}
 }

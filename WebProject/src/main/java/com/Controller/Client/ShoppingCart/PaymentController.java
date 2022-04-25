@@ -22,9 +22,11 @@ import com.Config.PaypalPaymentMethod;
 import com.Database.DTO.CartItem;
 import com.Database.entity.Order;
 import com.Database.entity.OrderDetail;
+import com.Database.entity.Product;
 import com.Database.entity.User;
 import com.Database.service.IPaypalService;
 import com.Database.service.IShoppingCartService;
+import com.Database.service.IThinhProductService;
 import com.Database.service.OrderDetailService;
 import com.Database.service.OrderService;
 import com.Util.PaypalUtils;
@@ -43,6 +45,8 @@ public class PaymentController {
 	private OrderDetailService orderDetailService;
 	@Autowired
 	private IShoppingCartService cartService;
+	@Autowired
+	private IThinhProductService productService;
 
 	// PayByMoney
 	@GetMapping("/PayCash")
@@ -68,7 +72,7 @@ public class PaymentController {
 
 	@GetMapping("/Delivery")
 	public String delivery(HttpServletRequest request) {
-		saveAllToDatabase(request, "CHƯA THANH TOÁN");
+		saveAllToDatabase(request, "CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG");
 		return "redirect:/Client/Payment/SuccessPayCash";
 	}
 
@@ -144,23 +148,40 @@ public class PaymentController {
 	public Collection<OrderDetail> addOrderDetail(Collection<CartItem> cartItem, Order order) {
 		Collection<OrderDetail> orderDetails = new ArrayList<OrderDetail>();
 		for (CartItem item : cartItem) {
-			OrderDetail orderDetail = orderDetailService.saveOrderDetail(
-					new OrderDetail(null, item.getQuantity(), item.getPrice(), order, item.getProduct()));
+			OrderDetail orderDetail = orderDetailService.saveOrderDetail(new OrderDetail(null, item.getQuantity(), item.getPrice(), order, item.getProduct()));
 			orderDetails.add(orderDetail);
+			editProduct(item.getQuantity(), item.getProduct().getProductId());
 		}
 		return orderDetails;
+	}
+	
+	public void editProduct(int quantity, long id) {
+		Product product = productService.getProductById(id);
+		product.setQuantity(product.getQuantity() - quantity);
+		productService.save(product);
 	}
 
 	@SuppressWarnings("unchecked")
 	public void saveAllToDatabase(HttpServletRequest request, String status) {
 		HttpSession session = request.getSession();
-		Collection<CartItem> cart = (Collection<CartItem>) session.getAttribute("cart");
-		String phone = (String) session.getAttribute("phone");
-		String address = (String) session.getAttribute("address");
-		User user = (User) session.getAttribute("user");
-		
-		Order order = new Order(null, address, phone, status, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 100000), null, user);
-		Order orderSaved = orderService.saveOrder(order);
-		addOrderDetail(cart, orderSaved);
+		if(status.equals("CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG")) {
+			Collection<CartItem> cart = (Collection<CartItem>) session.getAttribute("cart");
+			String phone = (String) session.getAttribute("phone");
+			String address = (String) session.getAttribute("address");
+			User user = (User) session.getAttribute("user");
+			
+			Order order = new Order(null, address, phone, status, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 500000000), null, user);
+			Order orderSaved = orderService.saveOrder(order);
+			addOrderDetail(cart, orderSaved);
+		}else {
+			Collection<CartItem> cart = (Collection<CartItem>) session.getAttribute("cart");
+			String phone = (String) session.getAttribute("phone");
+			String address = (String) session.getAttribute("address");
+			User user = (User) session.getAttribute("user");
+			
+			Order order = new Order(null, address, phone, status, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), null, user);
+			Order orderSaved = orderService.saveOrder(order);
+			addOrderDetail(cart, orderSaved);
+		}
 	}
 }
