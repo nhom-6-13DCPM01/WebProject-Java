@@ -123,12 +123,4 @@ public class UserController {
 			return "redirect:/Admin/User/ViewUser";
 		}
 	}
-	
-	@GetMapping("/Detail/{id}")
-	public String detailUser(@PathVariable("id") long id,ModelMap model) {
-		User user = userService.getUserById(id);
-		model.addAttribute("user",user);
-
-		return "Admin/User/userdetail";
-	}
 }
