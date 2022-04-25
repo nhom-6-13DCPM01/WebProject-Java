@@ -1,7 +1,5 @@
 package com.webproject.tutorial;
 
-import java.util.Properties;
-
 public class FileTest {
 
 	public static void main(String[] args) {
