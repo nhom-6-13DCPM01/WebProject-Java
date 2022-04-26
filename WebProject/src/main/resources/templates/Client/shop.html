@@ -46,7 +46,7 @@ layout:decorate="~{Layouts/clientlayout.html}">
                                                 <div class="product__discount__percent" th:text="'-'+${listDiscount.getDiscount()}+'%'"></div>
                                                 <ul class="product__item__pic__hover">
                                                     <li><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${listDiscount.getProductId()})}"><i class="fa fa-retweet"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                                    <li><a th:href="@{/Client/ShoppingCart/Add/{id} (id = ${listDiscount.productId})}"><i class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
                                             </div>
                                             <div class="product__discount__item__text">
@@ -67,12 +67,12 @@ layout:decorate="~{Layouts/clientlayout.html}">
                                     <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
                                         <ul class="product__item__pic__hover">
                                             <li><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${list.getProductId()})}"><i class="fa fa-retweet"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                            <li><a th:href="@{/Client/ShoppingCart/Add/{id} (id = ${list.getProductId()})}"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${list.getProductId()})}" th:text="${list.getName()}"></a></h6>
-                                        <h5 th:text="${list.getPrice()}-${list.getPrice()}*${list.getDiscount()/100}+' đ'"></h5>
+                                        <h5 th:text="${list.getPrice()}-${list.getPrice()}*${list.getDiscount()}/100+' đ'"></h5>
                                     </div>
                                 </div>
                             </div>

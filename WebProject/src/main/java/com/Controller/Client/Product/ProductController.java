@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import com.Database.DTO.CartItem;
 import com.Database.entity.Product;
 import com.Database.service.ProductService;
 
@@ -39,9 +43,12 @@ public class ProductController {
     }
 
     @GetMapping("/Shopdetail")
-    public String shopDetail(@RequestParam long id,Model model){
-        Product product = productService.getProductbyId(id);
-        model.addAttribute("product",product);
+    public String shopDetail(@RequestParam long id, Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+    	Product product = productService.getProductbyId(id);
+        CartItem item = new CartItem(product, 1);
+        model.addAttribute("item", item);
+        session.setAttribute("product", product);
         return "Client/shopdetail";
     }
 }

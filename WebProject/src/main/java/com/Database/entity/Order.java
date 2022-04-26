@@ -2,7 +2,7 @@ package com.Database.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.Set;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,6 +26,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "Orders")
 public class Order implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderId;
@@ -46,7 +51,7 @@ public class Order implements Serializable{
 	private Date deliveryDate;
 	
 	@OneToMany(mappedBy = "order" , cascade = CascadeType.ALL)
-	private Set<OrderDetail> orderDetails;
+	private Collection<OrderDetail> orderDetails;
 	
 	@JsonIgnore
 	@ManyToOne
@@ -101,11 +106,11 @@ public class Order implements Serializable{
 		this.deliveryDate = deliveryDate;
 	}
 
-	public Set<OrderDetail> getOrderDetails() {
+	public Collection<OrderDetail> getOrderDetails() {
 		return orderDetails;
 	}
 
-	public void setOrderDetails(Set<OrderDetail> orderDetails) {
+	public void setOrderDetails(Collection<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
@@ -124,7 +129,7 @@ public class Order implements Serializable{
 	}
 
 	public Order(Long orderId, String address, String phone, String status, Date creationDate, Date deliveryDate,
-			Set<OrderDetail> orderDetails, User user) {
+			Collection<OrderDetail> orderDetails, User user) {
 		super();
 		this.orderId = orderId;
 		this.address = address;
