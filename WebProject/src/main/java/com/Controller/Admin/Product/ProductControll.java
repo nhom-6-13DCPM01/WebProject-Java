@@ -117,8 +117,10 @@ public class ProductControll implements Serializable {
 	@PostMapping("/saveProduct")
 	public String saveProduct(ModelMap model,@Validated @ModelAttribute("product") Product product, BindingResult result,
 			@RequestParam("image") MultipartFile multipartFile, HttpServletRequest request) throws IOException {
-			Product productUpdate = productService.getProductById(product.getProductId());
-			product.setImage(productUpdate.getImage());
+		    if(product.getProductId()!=null){
+					Product productUpdate = productService.getProductById(product.getProductId());
+			        product.setImage(productUpdate.getImage());
+			}
 			String id = request.getParameter("categorySelect");
 			String idbran = request.getParameter("brandSelect");
 		Optional<Category> categorySelect = categoryService.findAllById(Long.parseLong(id));

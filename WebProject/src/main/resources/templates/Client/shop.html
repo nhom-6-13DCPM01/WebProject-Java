@@ -42,7 +42,7 @@ layout:decorate="~{Layouts/clientlayout.html}">
                                     <div th:each="listDiscount : ${listDiscount}" class="col-lg-4">
                                         <div class="product__discount__item">
                                             <div class="product__discount__item__pic set-bg"
-                                                data-setbg="img/product/discount/pd-1.jpg">
+                                                th:data-setbg="@{${listDiscount.photosImagePath}}">
                                                 <div class="product__discount__percent" th:text="'-'+${listDiscount.getDiscount()}+'%'"></div>
                                                 <ul class="product__item__pic__hover">
                                                     <li><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${listDiscount.getProductId()})}"><i class="fa fa-retweet"></i></a></li>
@@ -60,11 +60,12 @@ layout:decorate="~{Layouts/clientlayout.html}">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                </div>  
+                <div class="row">
                         <div class="row col-lg-12 col-md-8" >
                             <div th:each="list : ${list}" class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                                    <div class="product__item__pic set-bg" th:data-setbg="@{${list.photosImagePath}}">
                                         <ul class="product__item__pic__hover">
                                             <li><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${list.getProductId()})}"><i class="fa fa-retweet"></i></a></li>
                                             <li><a th:href="@{/Client/ShoppingCart/Add/{id} (id = ${list.getProductId()})}"><i class="fa fa-shopping-cart"></i></a></li>
@@ -85,7 +86,6 @@ layout:decorate="~{Layouts/clientlayout.html}">
                         <a th:unless="${list.last}" th:value="${list.totalPages}" style="width: 45px;" th:href="@{/Client/Product/Shop?page={page}(page=${list.number}+1)}">Next »</a>
                         <a id="lastPages" th:unless="${list.last}" th:value="${list.totalPages}" th:href="@{/Client/Product/Shop?page={page}(page=${list.totalPages})}" style="width: 45px;">Last »</a>
                     </div> 
-                </div>
             </div>
         </section>
 </body>
