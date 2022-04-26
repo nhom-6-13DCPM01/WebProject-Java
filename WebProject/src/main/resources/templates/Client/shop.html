@@ -72,7 +72,7 @@ layout:decorate="~{Layouts/clientlayout.html}">
                                     </div>
                                     <div class="product__item__text">
                                         <h6><a th:href="@{/Client/Product/Shopdetail?id={id}(id=${list.getProductId()})}" th:text="${list.getName()}"></a></h6>
-                                        <h5 th:text="${list.getPrice()}-${list.getPrice()}*${list.getDiscount()/100}+' đ'"></h5>
+                                        <h5 th:text="${list.getPrice()}-${list.getPrice()}*${list.getDiscount()}/100+' đ'"></h5>
                                     </div>
                                 </div>
                             </div>
