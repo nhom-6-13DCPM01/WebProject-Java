@@ -1,17 +1,23 @@
 package com.Controller.Client.ShoppingCart;
 
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.paypal.api.payments.Links;
@@ -29,6 +35,7 @@ import com.Database.service.IShoppingCartService;
 import com.Database.service.IThinhProductService;
 import com.Database.service.OrderDetailService;
 import com.Database.service.OrderService;
+import com.Util.MailSender;
 import com.Util.PaypalUtils;
 
 @Controller
@@ -47,6 +54,9 @@ public class PaymentController {
 	private IShoppingCartService cartService;
 	@Autowired
 	private IThinhProductService productService;
+	private Order order;
+	private MailSender mailSender;
+
 
 	// PayByMoney
 	@GetMapping("/PayCash")
@@ -56,20 +66,13 @@ public class PaymentController {
 		return "redirect:/Client/Product/Shop";
 	}
 	
-	@GetMapping("/SuccessPayCash")
-	public String successPayMoney(HttpServletRequest request) {
-		if(request.getSession().getAttribute("cart") != null)
-			return "Client/Payment/paysuccess";
-		return "redirect:/Client/Product/Shop";
-	}
-	
 	@GetMapping("/Recieve")
 	public String recieveMoney(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if (user.getRole().equals("ROLE_ADMIN")) {
 			saveAllToDatabase(request, "ĐÃ THANH TOÁN");
-			return "redirect:/Client/Payment/SuccessPayCash";
+			return "redirect:/Client/Payment/Mail";
 		}
 		return "redirect:/Client/Payment/PayCash";
 	}
@@ -78,7 +81,7 @@ public class PaymentController {
 	public String delivery(HttpServletRequest request) {
 		if(request.getSession().getAttribute("cart") != null) {
 			saveAllToDatabase(request, "CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG");
-			return "redirect:/Client/Payment/SuccessPayCash";
+			return "redirect:/Client/Payment/Mail";
 		}
 		return "redirect:/Client/Product/Shop";
 	}
@@ -119,7 +122,7 @@ public class PaymentController {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
 			if (payment.getState().equals("approved")) {
 				saveAllToDatabase(request, "ĐÃ THANH TOÁN");
-				return "Client/Payment/paysuccess";
+				return "redirect:/Client/Payment/Mail";
 			}
 		} catch (PayPalRESTException e) {
 			log.error(e.getMessage());
@@ -138,7 +141,23 @@ public class PaymentController {
 		session.removeAttribute("CheckLogin");
 		return "redirect:/Client/Product/Shop";
 	}
-
+	
+	@GetMapping("/Mail")
+	public String mail() {
+		try {
+			List<OrderDetail> orderDetails = orderService.getByIdList(this.order.getOrderId());
+			mailSender.sendThankyou(order.getUser(), this.order, orderDetails);
+			return "Client/Payment/paysuccess";
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/Client/Product/Shop";
+	}
+	
 	@GetMapping("/RemoveSession")
 	public String removeSession(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -152,6 +171,47 @@ public class PaymentController {
 		session.removeAttribute("CheckLogin");
 		session.removeAttribute("product");
 		return "redirect:/Home";
+	}
+	
+	@GetMapping("/Bill")
+	public String bill(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.setAttribute("orderDetails", null);
+		return "redirect:/Client/Payment/Bill/page/1";
+	}
+	
+	@GetMapping("/Bill/page/{pageNumber}")
+	public String showBillPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("orderDetails");
+		int pagesize = 5;
+		List<OrderDetail> orderDetails = orderService.getByIdList(this.order.getOrderId());
+		
+		if (pages == null) {
+			//Khởi tạo pageListHolder và set page size
+			pages = new PagedListHolder<>(orderDetails);
+			pages.setPageSize(pagesize);
+		} else {
+			final int goToPage = pageNumber - 1;
+			if (goToPage <= pages.getPageCount() && goToPage >= 0) {
+				pages.setPage(goToPage);
+			}
+		}
+		request.getSession().setAttribute("orderDetails", pages);
+		
+		int current = pages.getPage() + 1;
+		int begin = Math.max(1, current - orderDetails.size());
+		int end = Math.min(begin + 5, pages.getPageCount());
+		int totalPageCount = pages.getPageCount();
+		String baseUrl = "/Client/Payment/Bill/page/";
+		
+		model.addAttribute("beginIndex", begin);
+		model.addAttribute("endIndex", end);
+		model.addAttribute("currentIndex", current);
+		model.addAttribute("totalPageCount", totalPageCount);
+		model.addAttribute("baseUrl", baseUrl);
+		model.addAttribute("order", this.order);
+		model.addAttribute("orderDetails", pages);
+		return "Client/Payment/bill";
 	}
 	
 	//Phần ngoài luồng
@@ -182,7 +242,9 @@ public class PaymentController {
 			
 			Order order = new Order(null, address, phone, status, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis() + 500000000), null, user);
 			Order orderSaved = orderService.saveOrder(order);
+			this.order = orderSaved;
 			addOrderDetail(cart, orderSaved);
+			
 		}else {
 			Collection<CartItem> cart = (Collection<CartItem>) session.getAttribute("cart");
 			String phone = (String) session.getAttribute("phone");
@@ -191,6 +253,7 @@ public class PaymentController {
 			
 			Order order = new Order(null, address, phone, status, new Date(System.currentTimeMillis()), new Date(System.currentTimeMillis()), null, user);
 			Order orderSaved = orderService.saveOrder(order);
+			this.order = orderSaved;
 			addOrderDetail(cart, orderSaved);
 		}
 	}

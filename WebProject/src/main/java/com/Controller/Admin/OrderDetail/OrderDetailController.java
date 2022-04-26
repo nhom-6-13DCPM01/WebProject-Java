@@ -36,7 +36,7 @@ public class OrderDetailController {
 	}
 	
 	@GetMapping("Show/page/{pageNumber}")
-	public String showEmployeePage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+	public String showOrderDetailPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("orderDetails");
 		int pagesize = 5;
 		List<OrderDetail> orderDetails = orderService.getByIdList(order.getOrderId());
