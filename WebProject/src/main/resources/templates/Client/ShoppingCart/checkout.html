@@ -90,7 +90,7 @@
 					</div>
 				</div>
 				<div class="checkout__form">
-					<h4>Billing Details</h4>
+					<h4>Chi tiết hóa đơn</h4>
 					<form th:action="@{/Client/CheckOut/CheckLogin}" method="post">
 						<div class="row">
 							<div class="col-lg-8 col-md-6">
@@ -98,7 +98,7 @@
 									<div class="col-lg-8">
 										<div class="checkout__input">
 											<p>
-												Address<span>*</span>
+												Địa chỉ<span>*</span>
 											</p>
 											<input required type="text" name="address" placeholder="Số nhà Tên dường, Phường, Quận, Thành phố" class="checkout__input__add" style="color:black;">
 										</div>
@@ -108,7 +108,7 @@
 									<div class="col-lg-8">
 										<div class="checkout__input">
 											<p>
-												Phone<span>*</span>
+												Số điện thoại<span>*</span>
 											</p>
 											<input required type="text" name="phone" placeholder="số điện thoại" style="color:black;">
 										</div>
@@ -117,9 +117,9 @@
 							</div>
 							<div class="col-lg-4 col-md-6">
 								<div class="checkout__order">
-									<h4>Your Order</h4>
+									<h4>Hóa đơn của bạn</h4>
 									<div class="checkout__order__products">
-										Products <span>Total</span>
+										Sản phẩm <span>Tổng tiền</span>
 									</div>
 									<table th:each="item : ${session.cart}">
 										<tr>
@@ -128,20 +128,20 @@
 										</tr>
 									</table>
 									<div class="checkout__order__total">
-										Total <span th:text="${session.amountVN}"></span>
+										Tổng tiền <span th:text="${session.amountVN}"></span>
 									</div>
 									<div class="checkout__input__checkbox">
-										<label for="paycash"> Pay cash 
+										<label for="paycash"> Trả bằng tiền mặt 
 											<input type="checkbox" id="paycash" name="payment" value="paycash"> <span class="checkmark"></span>
 										</label>
 									</div>
 									<!--Chỗ này tính Paypal-->
 									<div class="checkout__input__checkbox">
-										<label for="paypal"> Paypal 
+										<label for="paypal"> Trả bằng Paypal
 											<input type="checkbox" id="paypal" name="payment" value="paypal"> <span class="checkmark"></span>
 										</label>
 									</div>
-									<button type="submit" class="site-btn">PLACE ORDER</button>
+									<button type="submit" class="site-btn">Xác nhận</button>
 								</div>
 							</div>
 						</div>

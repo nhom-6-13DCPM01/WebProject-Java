@@ -81,14 +81,14 @@ body {
 								</div>
 							</div>
 							<div class="content">
-								<h1>Pay by cash</h1>
+								<h1>Trả bằng tiền mặt</h1>
 								<p>
-									Total: <span th:text="${session.amountVN}"></span>
+									Tổng tiền: <span th:text="${session.amountVN}"></span>
 								</p>
 								<div>
-									<a th:href="@{/Client/Payment/Recieve}">Pay</a> 
-									<a th:href="@{/Client/Payment/Delivery}">Delivery</a>
-									<a th:href="@{/Client/Payment/CancelPay}">Cancel</a>
+									<a th:href="@{/Client/Payment/Recieve}">Trả trực tiếp</a> 
+									<a th:href="@{/Client/Payment/Delivery}">Giao hàng</a>
+									<a th:href="@{/Client/Payment/CancelPay}">Hủy thanh toán</a>
 								</div>
 							</div>
 						</div>
@@ -97,8 +97,5 @@ body {
 			</div>
 		</section>
 	</div>
-	<script type="text/javascript">
-		
-	</script>
 </body>
 </html>
