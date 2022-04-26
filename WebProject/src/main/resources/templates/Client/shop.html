@@ -148,7 +148,7 @@ layout:decorate="~{Layouts/clientlayout.html}">
                         <a th:if="${list.pageable.pageNumber}>0" style="width: 45px;" th:href="@{/Client/Product/Shop?page={page}(page=${list.number}-1)}">« Prev</a>
                         <a th:if="${list.totalPages > 1}" th:each="pageNumber : ${pageNumbers}" th:classappend="${list.number}+1==${pageNumber}?'activepage':''" th:href="@{/Client/Product/Shop?page={page}(page=${pageNumber}-1)}" th:text="${pageNumber}"></a>
                         <a th:unless="${list.last}" th:value="${list.totalPages}" style="width: 45px;" th:href="@{/Client/Product/Shop?page={page}(page=${list.number}+1)}">Next »</a>
-                        <a id="lastPages" th:unless="${list.last}" th:value="${list.totalPages}" th:href="@{/Client/Product/Shop?page={page}(page=${list.totalPages})}" style="width: 45px;">Last »</a>
+                        <a id="lastPages" th:unless="${list.last}" th:value="${list.totalPages}" th:href="@{/Client/Product/Shop?page={page}(page=${list.totalPages}-1)}" style="width: 45px;">Last »</a>
                     </div> 
             </div>
         </section>

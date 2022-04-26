@@ -48,6 +48,7 @@ public class ProductController {
     	Product product = productService.getProductbyId(id);
         CartItem item = new CartItem(product, 1);
         model.addAttribute("item", item);
+        model.addAttribute("imgUrl",product.getPhotosImagePath());
         session.setAttribute("product", product);
         return "Client/shopdetail";
     }
