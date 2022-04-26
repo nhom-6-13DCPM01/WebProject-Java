@@ -1,5 +1,6 @@
 package com.Database.entity;
 
+import java.beans.Transient;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Set;
@@ -191,6 +192,11 @@ public class Product implements Serializable{
 		this.orderDetails = orderDetails;
 	}
 	
-	
+	@Transient
+    public String getPhotosImagePath() {
+        if (image == null) return null;
+         
+        return "/src/main/resources/static/Client/img/product/images/" + image;
+    }
 
 }

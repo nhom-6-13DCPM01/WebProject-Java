@@ -16,6 +16,13 @@ import com.Database.service.MyUserDetail;
 @Controller
 public class HomeController {
 
+
+	@GetMapping("/")
+	public String Index() {
+
+		return "redirect:/Home";
+	}
+
 	@GetMapping("/Home")
 	public String hello(@AuthenticationPrincipal MyUserDetail userDetails, HttpServletRequest request) {
 		HttpSession session = request.getSession();
