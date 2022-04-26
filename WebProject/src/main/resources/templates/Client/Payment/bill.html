@@ -5,19 +5,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Organi | Bill</title>
+<style>
+#table {
+	width: 950px;
+	overflow-x: auto;
+	font-size: 35px;
+	font-family: "Tahoma";
+	padding-top: 50px;
+}
+
+#head {
+	font-weight: bold;
+	color:black;
+}
+
+#pagination {
+	padding-top: 50px;
+}
+</style>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div class="d-grid gap-2 d-md-flex justify-content-center">
-			<a class="btn btn-primary" th:href="@{/Client/Payment/RemoveSession}" type="button">Home</a>
+			<a class="btn btn-primary" th:href="@{/Client/Payment/RemoveSession}"
+				type="button">Home</a>
 		</div>
 		<div class="form-group row">
 			<div class="input-group input-group-lg">
 				<div class="input-group-prepend">
 					<span class="input-group-text">Mã hóa đơn: </span>
 				</div>
-				<input th:field="*{orderId}" class="form-control" aria-label="Large"
-					aria-describedby="inputGroup-sizing-sm" readonly />
+				<input th:value="${order.orderId}" class="form-control"
+					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -25,10 +44,9 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Mã và tên: </span>
 				</div>
-				<input th:field="*{user}" th:value="${order.user}"
-					class="form-control" aria-label="Large"
-					aria-describedby="inputGroup-sizing-sm" readonly /> <input
-					th:value="${order.user.displayName}" class="form-control"
+				<input th:value="${order.user.userId}" class="form-control"
+					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
+				<input th:value="${order.user.displayName}" class="form-control"
 					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
@@ -37,8 +55,8 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Địa chỉ: </span>
 				</div>
-				<input th:field="*{address}" class="form-control" aria-label="Large"
-					aria-describedby="inputGroup-sizing-sm" readonly />
+				<input th:value="${order.address}" class="form-control"
+					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -46,8 +64,8 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Điện thoại: </span>
 				</div>
-				<input th:field="*{phone}" class="form-control" aria-label="Large"
-					aria-describedby="inputGroup-sizing-sm" readonly />
+				<input th:value="${order.phone}" class="form-control"
+					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -55,8 +73,8 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Trạng thái: </span>
 				</div>
-				<input th:field="*{status}" class="form-control" aria-label="Large"
-					aria-describedby="inputGroup-sizing-sm" readonly />
+				<input th:value="${order.status}" class="form-control"
+					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -64,8 +82,9 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Ngày tạo: </span>
 				</div>
-				<input type="date" th:field="*{creationDate}" class="form-control"
-					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
+				<input type="date" th:value="${order.creationDate}"
+					class="form-control" aria-label="Large"
+					aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="form-group row">
@@ -73,8 +92,9 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">Ngày giao: </span>
 				</div>
-				<input type="date" th:field="*{deliveryDate}" class="form-control"
-					aria-label="Large" aria-describedby="inputGroup-sizing-sm" readonly />
+				<input type="date" th:value="${order.deliveryDate}"
+					class="form-control" aria-label="Large"
+					aria-describedby="inputGroup-sizing-sm" readonly />
 			</div>
 		</div>
 		<div class="container">
