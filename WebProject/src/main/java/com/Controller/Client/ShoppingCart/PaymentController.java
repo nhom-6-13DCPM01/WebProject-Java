@@ -50,13 +50,17 @@ public class PaymentController {
 
 	// PayByMoney
 	@GetMapping("/PayCash")
-	public String payByMoney() {
-		return "Client/Payment/paycash";
+	public String payByMoney(HttpServletRequest request) {
+		if(request.getSession().getAttribute("cart") != null)
+			return "Client/Payment/paycash";
+		return "redirect:/Client/Product/Shop";
 	}
 	
 	@GetMapping("/SuccessPayCash")
-	public String successPayMoney() {
-		return "Client/Payment/paysuccess";
+	public String successPayMoney(HttpServletRequest request) {
+		if(request.getSession().getAttribute("cart") != null)
+			return "Client/Payment/paysuccess";
+		return "redirect:/Client/Product/Shop";
 	}
 	
 	@GetMapping("/Recieve")
@@ -72,8 +76,11 @@ public class PaymentController {
 
 	@GetMapping("/Delivery")
 	public String delivery(HttpServletRequest request) {
-		saveAllToDatabase(request, "CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG");
-		return "redirect:/Client/Payment/SuccessPayCash";
+		if(request.getSession().getAttribute("cart") != null) {
+			saveAllToDatabase(request, "CHƯA THANH TOÁN VÀ CHƯA GIAO HÀNG");
+			return "redirect:/Client/Payment/SuccessPayCash";
+		}
+		return "redirect:/Client/Product/Shop";
 	}
 
 	// Paypal
@@ -83,22 +90,24 @@ public class PaymentController {
 		String successUrl = PaypalUtils.getBaseURL(request) + "/" + URL_PAYPAL_SUCCESS;
 		
 		HttpSession session = request.getSession();
-		double price = (double) session.getAttribute("amount");
-		try {
-			Payment payment = paypalService.createPayment(
-					PaypalUtils.chuyenDoiTienVietThanhDola(price), 
-					"USD",
-					PaypalPaymentMethod.paypal, 
-					PaypalPaymentIntent.sale, 
-					"payment description", 
-					cancelUrl, successUrl);
-			for (Links links : payment.getLinks()) {
-				if (links.getRel().equals("approval_url")) {
-					return "redirect:" + links.getHref();
+		if(session.getAttribute("cart") != null) {
+			double price = (double) session.getAttribute("amount");
+			try {
+				Payment payment = paypalService.createPayment(
+						PaypalUtils.chuyenDoiTienVietThanhDola(price), 
+						"USD",
+						PaypalPaymentMethod.paypal, 
+						PaypalPaymentIntent.sale, 
+						"payment description", 
+						cancelUrl, successUrl);
+				for (Links links : payment.getLinks()) {
+					if (links.getRel().equals("approval_url")) {
+						return "redirect:" + links.getHref();
+					}
 				}
+			} catch (PayPalRESTException e) {
+				log.error(e.getMessage());
 			}
-		} catch (PayPalRESTException e) {
-			log.error(e.getMessage());
 		}
 		return "redirect:/Client/CheckOut/Show";
 	}
@@ -127,7 +136,7 @@ public class PaymentController {
 	public String continueBuying(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("CheckLogin");
-		return "redirect:/Home";
+		return "redirect:/Client/Product/Shop";
 	}
 
 	@GetMapping("/RemoveSession")
