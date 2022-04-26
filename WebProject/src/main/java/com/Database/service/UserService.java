@@ -1,9 +1,12 @@
 package com.Database.service;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Collection;
 
 import javax.mail.MessagingException;
 
+import com.Database.entity.Order;
+import com.Database.entity.OrderDetail;
 import com.Database.entity.User;
 
 import org.springframework.data.domain.Page;
@@ -25,4 +28,6 @@ public interface UserService {
 	void sendVerificationEmail(User user, String siteURL) throws MessagingException, UnsupportedEncodingException;
 
 	boolean verify(String verificationCode);
+
+	void sendThankyou(User user,Order order,Collection<OrderDetail> orderDetails) throws MessagingException, UnsupportedEncodingException; 
 }
