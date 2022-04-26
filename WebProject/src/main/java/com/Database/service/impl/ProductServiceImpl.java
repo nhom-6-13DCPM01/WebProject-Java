@@ -1,5 +1,8 @@
 package com.Database.service.impl;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.Database.entity.Product;
 import com.Database.repository.ProductRepository;
 import com.Database.service.ProductService;
@@ -34,6 +37,60 @@ public class ProductServiceImpl implements ProductService{
 		Pageable pageable = PageRequest.of(0, 6,Sort.by(Sort.Direction.DESC, "discount"));
 		return productRepository.findAll(pageable);
 	}
+
+	@Override
+	public List<Product> getListProduct() { 
+		return productRepository.findAll(); 
+		}
+	
+
+   
+
+   @Override
+   public Optional<Product> findById(Long id) {
+	   return productRepository.findById(id);
+   }
+
+
+
+   @Override
+   public long count() {
+	   return productRepository.count();
+   }
+
+   
+
+   @Override
+   public void delete(Product entity) {
+	   productRepository.delete(entity);
+   }
+
+
+
+   @Override
+   public void deleteById(Long id) {
+	   productRepository.deleteById(id);
+   }
+
+
+
+   @Override
+   public Product saveProduct(Product product) {
+	   return productRepository.save(product);
+   }
+
+
+   @Override
+   public Product getProductById(Long listproduct) {
+	   return productRepository.findById(listproduct).get();
+   }
+   
+
+   @Override
+   public Product updateProduct(Product product) {
+	   return productRepository.save(product);
+   }
+
 
 	
 }

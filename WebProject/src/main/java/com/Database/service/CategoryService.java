@@ -19,7 +19,7 @@ public interface CategoryService {
     public void remove(Category category);
 
     public void removeById(Long Id);
-
-  
+	
+	Optional<Category> findAllById(long id);
     
 }

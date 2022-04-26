@@ -391,7 +391,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Categories') ? 'active':''}" th:href="@{/Admin/Categories/List}">Sản Phẩm</a></li>
+                <li class="nav-item"> <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Product') ? 'active':''}" th:href="@{/Admin/Product/}">Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Categories') ? 'active':''}" th:href="@{/Admin/Categories/List}">Loại Sản Phẩm</a></li>
                 <li class="nav-item"> <a class="nav-link" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/Admin/Order') ? 'active':''}" th:href="@{/Admin/Order/Show}">Đơn Hàng</a></li>
               </ul>
