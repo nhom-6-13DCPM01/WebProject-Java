@@ -35,7 +35,7 @@ import com.Database.service.IShoppingCartService;
 import com.Database.service.IThinhProductService;
 import com.Database.service.OrderDetailService;
 import com.Database.service.OrderService;
-import com.Util.MailSender;
+import com.Database.service.UserService;
 import com.Util.PaypalUtils;
 
 @Controller
@@ -55,7 +55,8 @@ public class PaymentController {
 	@Autowired
 	private IThinhProductService productService;
 	private Order order;
-	private MailSender mailSender;
+	@Autowired
+	UserService userService;
 
 
 	// PayByMoney
@@ -146,13 +147,12 @@ public class PaymentController {
 	public String mail() {
 		try {
 			List<OrderDetail> orderDetails = orderService.getByIdList(this.order.getOrderId());
-			mailSender.sendThankyou(order.getUser(), this.order, orderDetails);
+			userService.sendThankyou(order.getUser(), this.order, orderDetails);
 			return "Client/Payment/paysuccess";
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/Client/Product/Shop";
