@@ -31,31 +31,27 @@ public class ShoppingCartController {
 	
 	@GetMapping("/Show")
 	public String showShoppingCart(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		Collection<CartItem> cart = shoppingCartService.getAll();
-		int sizeCart = shoppingCartService.size();
-		double amount = shoppingCartService.getAmount();
-		session.setAttribute("cart", cart);
-		session.setAttribute("sizeCart", sizeCart);
-		session.setAttribute("amountVN", NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(amount));
-		session.setAttribute("amount", amount);
+		session(request);
 		return "/Client/ShoppingCart/shopping-cart";
 	}
 	
 	@GetMapping("/Add/{id}")
-	public String addItem(@PathVariable("id")Long id) {
+	public String addItem(@PathVariable("id")Long id, HttpServletRequest request) {
 		Product product = productService.getProductById(id);
 		CartItem item = new CartItem(product, 1);
 		shoppingCartService.addItem(item);
-		return "redirect:/Client/ShoppingCart/Show";
+		session(request);
+		return "redirect:/Client/Product/Shop";
 	}
 	
 	@PostMapping("/AddDetail")
 	public String addDetailItem(@ModelAttribute("item")CartItem item, HttpServletRequest request) {
-		Product product = (Product) request.getSession().getAttribute("product");
+		HttpSession session = request.getSession();
+		Product product = (Product) session.getAttribute("product");
 		CartItem itemAdd = new CartItem(product, item.getQuantity());
 		shoppingCartService.addItem(itemAdd);
-		return "redirect:/Client/ShoppingCart/Show";
+		session(request);
+		return "redirect:/Client/Product/Shopdetail?id="+product.getProductId().toString();
 	}
 	
 	@GetMapping("/Delete/{id}")
@@ -68,5 +64,16 @@ public class ShoppingCartController {
 	public String updateCart(@RequestParam("id")Long id, @RequestParam("quantity")Integer quantity) {
 		shoppingCartService.updateItem(id, quantity);
 		return "redirect:/Client/ShoppingCart/Show";
+	}
+	
+	public void session(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		Collection<CartItem> cart = shoppingCartService.getAll();
+		int sizeCart = shoppingCartService.size();
+		double amount = shoppingCartService.getAmount();
+		session.setAttribute("cart", cart);
+		session.setAttribute("sizeCart", sizeCart);
+		session.setAttribute("amountVN", NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(amount));
+		session.setAttribute("amount", amount);
 	}
 }

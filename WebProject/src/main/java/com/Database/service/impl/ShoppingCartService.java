@@ -21,8 +21,11 @@ public class ShoppingCartService implements IShoppingCartService{
 		CartItem existedItem = cart.get(item.getProduct().getProductId());
 		if(existedItem == null)
 			cart.put(item.getProduct().getProductId(), item);
-		else
-			existedItem.setQuantity(existedItem.getQuantity() + item.getQuantity());
+		else {
+			int quantity = existedItem.getQuantity() + item.getQuantity();
+			existedItem.setQuantity(quantity);
+			existedItem.setPrice(existedItem.getPrice() * quantity);
+		}
 	}
 	
 	@Override
@@ -34,7 +37,7 @@ public class ShoppingCartService implements IShoppingCartService{
 	public void updateItem(long productId, int quantity) {
 		CartItem item = cart.get(productId);
 		item.setQuantity(quantity);
-		item.setPrice(quantity * item.getProduct().getPrice());
+		item.setPrice(item.getPrice() * quantity);
 		
 		if(item.getQuantity() <= 0) {
 			removeItem(productId);
@@ -58,6 +61,6 @@ public class ShoppingCartService implements IShoppingCartService{
 	
 	@Override
 	public double getAmount() {
-		return cart.values().stream().mapToDouble(item -> item.getPrice() - ((item.getPrice() * item.getProduct().getDiscount())/100)).sum();
+		return cart.values().stream().mapToDouble(item -> item.getPrice()).sum();
 	}
 }
