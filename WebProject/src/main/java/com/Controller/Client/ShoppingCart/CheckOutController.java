@@ -19,12 +19,19 @@ public class CheckOutController {
 	private String payway;
 	
 	@GetMapping("/Show")
-	public String index() {
-		return "Client/ShoppingCart/checkout";
+	public String index(HttpServletRequest request) {
+		if(request.getSession().getAttribute("cart") != null)
+			return "Client/ShoppingCart/checkout";
+		return "redirect:/Client/Product/Shop";
+	}
+	
+	@GetMapping("/CheckLogin")
+	public String getCheckLogin() {
+		return "redirect:/Home";
 	}
 	
 	@PostMapping("/CheckLogin")
-	public String CheckLogin(@AuthenticationPrincipal MyUserDetail userDetails,@ModelAttribute("address")String address, @ModelAttribute("phone")String phone, HttpServletRequest request) {
+	public String postCheckLogin(@AuthenticationPrincipal MyUserDetail userDetails,@ModelAttribute("address")String address, @ModelAttribute("phone")String phone, HttpServletRequest request) {
 		User user = null;
 		payway = (String)  request.getParameter("payment");
 		HttpSession session = request.getSession();
@@ -45,10 +52,14 @@ public class CheckOutController {
 	
 	@GetMapping("/ConfirmTheWayToPay")
 	public String redirectPayment(HttpServletRequest request) {
-		if(payway.equals("paypal"))
-			return "redirect:/Client/Payment/PayByPaypal";
-		if(payway.equals("paycash"))
-			return "redirect:/Client/Payment/PayCash";
+		try {
+			if(payway.equals("paypal"))
+				return "redirect:/Client/Payment/PayByPaypal";
+			if(payway.equals("paycash"))
+				return "redirect:/Client/Payment/PayCash";
+		}catch(Exception e) {
+			
+		}
 		return "redirect:/Client/CheckOut/Show";
 	}
 }

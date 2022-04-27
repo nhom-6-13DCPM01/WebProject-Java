@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.Database.DTO.CartItem;
 import com.Database.entity.Product;
+import com.Database.service.IShoppingCartService;
 import com.Database.service.ProductService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/Client/Product")
 public class ProductController {
-    
+	@Autowired
+	IShoppingCartService shoppingCartService;
     @Autowired
     ProductService productService;
 
     @GetMapping("/Shop")
-    public String shop(@RequestParam(name="page",required = false,defaultValue = "0") Integer page,@RequestParam(name="size",required = false,defaultValue = "12") Integer size,Model model){
+    public String shop(@RequestParam(name="page",required = false,defaultValue = "0") Integer page,
+    		@RequestParam(name="size",required = false,defaultValue = "12") Integer size,Model model){
         Page<Product> list = productService.getListProduct(page, size);
         Page<Product> listDiscount = productService.getListDiscount();
         model.addAttribute("list",list);

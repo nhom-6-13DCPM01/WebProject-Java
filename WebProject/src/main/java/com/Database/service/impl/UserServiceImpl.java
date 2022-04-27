@@ -1,11 +1,13 @@
 package com.Database.service.impl;
 
 import java.io.UnsupportedEncodingException;
-
+import java.util.Collection;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.Database.entity.Order;
+import com.Database.entity.OrderDetail;
 import com.Database.entity.User;
 import com.Database.repository.UserRepository;
 import com.Database.service.UserService;
@@ -72,7 +74,7 @@ public class UserServiceImpl implements UserService{
 					+ "Please click the link below to verify your registration:<br>"
 					+ "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
 					+ "Thank you,<br>"
-					+ "Your company name.";
+					+ "Shop JAVA";
 			 
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -123,5 +125,50 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void updateUser(User user) {
 		userRepository.save(user);
+	}
+
+	@Override
+	public void sendThankyou(User user, Order order, Collection<OrderDetail> orderDetails)
+			throws MessagingException, UnsupportedEncodingException {
+				String toAddress = user.getEmail();
+				String fromAddress = "shopjavaweb@gmail.com";
+				String senderName = "Shop Java Web Thank you";
+				String subject = "Thank you for your Order";
+				String content = "Dear [[name]],<br>"
+						+"Your order with id: "+order.getOrderId()+"<br>"
+						+"With infor <br>"
+						+"Address: "+order.getAddress()+"<br>"
+						+"Phone: "+order.getPhone()+"<br>"
+						 + "<h2>List of Order detail</h2>"
+						 + "<table border = 1>"
+						 +"<thead bgcolor=#b9c9fe >"
+							+"<th>Tên sản phẩm</th>"
+							+"<th>Số lượng</th>"
+							+"<th>Tổng tiền</th>"
+						+"</thead>"
+						+"<tbody>";
+				for(OrderDetail orderDetail : orderDetails){
+						content+= "<tr><td>"+orderDetail.getProduct().getName()+"</td>"
+								  +"<td>"+orderDetail.getQuantity()+"</td>"
+								  +"<td>"+orderDetail.getTotal()+"</td></tr>";
+				}
+				 content+="</tbody>"
+						+"</table>"
+						+ "Thank you,<br>"
+						+ "Shop JAVA";
+						
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message);
+				 
+				helper.setFrom(fromAddress, senderName);
+				helper.setTo(toAddress);
+				helper.setSubject(subject);
+				 
+				content = content.replace("[[name]]", user.getDisplayName());
+				 
+				helper.setText(content, true);
+				 
+				mailSender.send(message);
+		
 	}	
 }

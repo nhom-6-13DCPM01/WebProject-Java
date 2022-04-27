@@ -16,9 +16,10 @@ public class CartItem {
 
 	public CartItem(Product product, int quantity) {
 		super();
+		float price = product.getPrice() - ((product.getPrice()*product.getDiscount())/100);
 		this.product = product;
 		this.quantity = quantity;
-		this.price = product.getPrice() * quantity;
+		this.price = price * quantity;
 	}
 
 	public Product getProduct() {
@@ -46,6 +47,6 @@ public class CartItem {
 	}
 	
 	public String getPriceVN() {
-		return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(quantity *product.getPrice());
+		return NumberFormat.getCurrencyInstance(new Locale("vi", "VN")).format(price);
 	}
 }

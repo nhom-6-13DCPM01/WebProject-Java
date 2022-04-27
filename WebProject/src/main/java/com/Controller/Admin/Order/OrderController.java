@@ -37,9 +37,9 @@ public class OrderController {
 	}
 	
 	@GetMapping("Show/page/{pageNumber}")
-	public String showEmployeePage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
+	public String showOrderPage(HttpServletRequest request, @PathVariable int pageNumber, Model model) {
 		PagedListHolder<?> pages = (PagedListHolder<?>) request.getSession().getAttribute("orders");
-		int pagesize = 5;
+		int pagesize = 10;
 		List<Order> list = orderService.getAllSort(sort);
 		
 		if (pages == null) {
