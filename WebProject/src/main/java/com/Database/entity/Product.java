@@ -196,7 +196,7 @@ public class Product implements Serializable{
     public String getPhotosImagePath() {
         if (image == null) return null;
          
-        return "/src/main/resources/static/Client/img/product/images/" + image;
+        return "/Client/img/product/images/" + image;
     }
 
 }

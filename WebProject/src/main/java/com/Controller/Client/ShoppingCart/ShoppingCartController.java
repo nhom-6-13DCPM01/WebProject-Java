@@ -32,7 +32,7 @@ public class ShoppingCartController {
 	@GetMapping("/Show")
 	public String showShoppingCart(HttpServletRequest request) {
 		session(request);
-		return "/Client/ShoppingCart/shopping-cart";
+		return "Client/ShoppingCart/shopping-cart";
 	}
 	
 	@GetMapping("/Add/{id}")
