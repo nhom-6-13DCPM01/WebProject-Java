@@ -2,17 +2,22 @@ package com.Controller.Admin.User;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
+
 
 import com.Database.entity.User;
 import com.Database.service.MyUserDetail;
+import com.Database.service.OrderService;
 import com.Database.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +35,8 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	OrderService orderService;
 
 	@GetMapping("/List")
 	public String listUser(@RequestParam Integer page,@RequestParam Integer size,Model model) {
@@ -92,6 +99,15 @@ public class UserController {
 		}
 		
 	}
+	@GetMapping("/DeleteOrder")
+	public String deleteOrder(@RequestParam("id") long id,HttpServletRequest request){
+		orderService.deleteOrder(id);
+		return getPreviousPageByRequest(request).orElse("/");
+	}
+	protected Optional<String> getPreviousPageByRequest(HttpServletRequest request)
+	{
+   		return Optional.ofNullable(request.getHeader("Referer")).map(requestUrl -> "redirect:" + requestUrl);
+	}			
 
 	@GetMapping("/Delete")
 	public String deleteUser(@RequestParam("id") long id,ModelMap model,@AuthenticationPrincipal MyUserDetail userDetail,RedirectAttributes redirectAttributes) {

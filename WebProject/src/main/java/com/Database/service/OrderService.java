@@ -23,4 +23,6 @@ public interface OrderService {
 
 	List<Order> getAllSort(Sort sort);
 
+	void deleteOrder(long id);
+
 }

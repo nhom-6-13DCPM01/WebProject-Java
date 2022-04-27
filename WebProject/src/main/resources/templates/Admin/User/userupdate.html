@@ -80,6 +80,11 @@
                         th:href="@{/Admin/OrderDetail/Show/{id} (id = ${listOrder.orderId})}">Detail
                         </a>
                       </span>
+                       <span>
+                        <a type="button" th:attr="onclick='return Del(\'' + ${listOrder.getOrderId()} +  '\');'" class="btn btn-danger btn-rounded btn-sm my-0 waves-effect waves-light" 
+                        th:href="@{/Admin/User/DeleteOrder?id={id} (id = ${listOrder.orderId})}">Delete
+                        </a>
+                      </span>
                     </td>
                   </tr>
               </tbody>
